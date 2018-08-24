@@ -31,6 +31,20 @@ static EShopDatabase *instance = nil;
 }
 
 - (BOOL)createAndOpenDatabase{
+    
+    NSMutableDictionary *test = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"obj",@"key", nil];
+    if ([test isKindOfClass:[NSDictionary class]]){
+        if(test[@"key"]){
+        NSLog(@"NSDictionary_Key");
+        }
+        if(!test[@"notkey"]){
+            NSLog(@"NSDictionary_noKey");
+        }
+    }
+    if (
+        [test isKindOfClass:[NSMutableDictionary class]]){
+        NSLog(@"NSMutableDictionary");
+    }
     NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)  firstObject];
     NSString *databasePath = [documentPath stringByAppendingPathComponent:@"eShop.db"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
