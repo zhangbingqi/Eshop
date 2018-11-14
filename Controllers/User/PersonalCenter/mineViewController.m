@@ -8,10 +8,10 @@
 
 #import "mineViewController.h"
 
-#define WIDTH  (([[UIScreen mainScreen] bounds].size.width))
-#define HEIGHT  (([[UIScreen mainScreen] bounds].size.height))
+#define SHPWIDTH  (([[UIScreen mainScreen] bounds].size.width))
+#define SHPHEIGHT  (([[UIScreen mainScreen] bounds].size.height))
 
-#define MYBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
+#define SHPBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
 
 @interface mineViewController ()<UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 @property UITextField *accountNameText;
@@ -34,7 +34,7 @@
     
     
     //账户名
-    UIView *accountNameView = [[UIView alloc] initWithFrame:CGRectMake(0, 66+20, WIDTH, 44)];
+    UIView *accountNameView = [[UIView alloc] initWithFrame:CGRectMake(0, 66+20, SHPWIDTH, 44)];
     accountNameView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:accountNameView];
     
@@ -42,15 +42,15 @@
     [accountNameLable setText:@"账户名"];
     [accountNameView addSubview:accountNameLable];
     
-    self.accountNameText = [[UITextField alloc] initWithFrame:CGRectMake(15+100, 0, WIDTH-15-100-15, 44)];
+    self.accountNameText = [[UITextField alloc] initWithFrame:CGRectMake(15+100, 0, SHPWIDTH-15-100-15, 44)];
     self.accountNameText.textAlignment = NSTextAlignmentRight;
-    //[self.accountNameText setTextColor:MYBLUE];
+    //[self.accountNameText setTextColor:SHPBLUE];
     [accountNameView addSubview:self.accountNameText];
     self.accountNameText.enabled = NO;
     self.accountNameText.delegate =self;
     
     //年龄
-    UIView *ageView = [[UIView alloc] initWithFrame:CGRectMake(0, 66+20+44+20, WIDTH, 44)];
+    UIView *ageView = [[UIView alloc] initWithFrame:CGRectMake(0, 66+20+44+20, SHPWIDTH, 44)];
     ageView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:ageView];
     
@@ -58,9 +58,9 @@
     [ageLable setText:@"年龄"];
     [ageView addSubview:ageLable];
     
-    self.ageText = [[UITextField alloc] initWithFrame:CGRectMake(15+100, 0, WIDTH-15-100-15, 44)];
+    self.ageText = [[UITextField alloc] initWithFrame:CGRectMake(15+100, 0, SHPWIDTH-15-100-15, 44)];
     self.ageText.textAlignment = NSTextAlignmentRight;
-    [self.ageText setTextColor:MYBLUE];
+    [self.ageText setTextColor:SHPBLUE];
     [ageView addSubview:self.ageText];
     self.ageText.enabled = NO;
     self.ageText.delegate =self;
@@ -69,7 +69,7 @@
     
     
     //性别
-    UIView *sexView = [[UIView alloc] initWithFrame:CGRectMake(0, 66+20+44+20+44+20, WIDTH, 44)];
+    UIView *sexView = [[UIView alloc] initWithFrame:CGRectMake(0, 66+20+44+20+44+20, SHPWIDTH, 44)];
     sexView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:sexView];
     
@@ -77,58 +77,58 @@
     [sexLable setText:@"性别"];
     [sexView addSubview:sexLable];
     
-    self.sexText = [[UITextField alloc] initWithFrame:CGRectMake(15+100, 0, WIDTH-15-100-15, 44)];
+    self.sexText = [[UITextField alloc] initWithFrame:CGRectMake(15+100, 0, SHPWIDTH-15-100-15, 44)];
     self.sexText.textAlignment = NSTextAlignmentRight;
-    [self.sexText setTextColor:MYBLUE];
+    [self.sexText setTextColor:SHPBLUE];
     [sexView addSubview:self.sexText];
     self.sexText.enabled = NO;
     self.sexText.delegate =self;
     [self.sexText addTarget:self action:@selector(selectSex) forControlEvents:UIControlEventTouchDown];
     
     //viewForPicker
-    self.viewForPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(WIDTH-40,  66+20+44+20+44+20, 30, 66)];
+    self.viewForPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(SHPWIDTH-40,  66+20+44+20+44+20, 30, 66)];
     self.viewForPicker.backgroundColor = [UIColor whiteColor];
     self.viewForPicker.delegate = self;
     self.viewForPicker.dataSource = self;
     self.viewForPicker.showsSelectionIndicator = YES;
     
     //编辑个人信息
-    UIButton *editInformationButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 66+20+44+20+44+20+44+20, WIDTH, 44)];
+    UIButton *editInformationButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 66+20+44+20+44+20+44+20, SHPWIDTH, 44)];
     [self.view addSubview:editInformationButton];
     editInformationButton.backgroundColor = [UIColor whiteColor];
     [editInformationButton setTitle:@"编辑个人信息" forState:UIControlStateNormal];
-    [editInformationButton setTitleColor:MYBLUE forState:UIControlStateNormal];
+    [editInformationButton setTitleColor:SHPBLUE forState:UIControlStateNormal];
     [editInformationButton addTarget:self action:@selector(editInformation) forControlEvents:UIControlEventTouchUpInside];
     
     //保存个人信息
-    self.savePesonalInformation = [[UIButton alloc] initWithFrame:CGRectMake(0, 66+20+44+20+44+20+44+20, WIDTH, 44)];
-    self.savePesonalInformation.backgroundColor = MYBLUE;
+    self.savePesonalInformation = [[UIButton alloc] initWithFrame:CGRectMake(0, 66+20+44+20+44+20+44+20, SHPWIDTH, 44)];
+    self.savePesonalInformation.backgroundColor = SHPBLUE;
     [self.savePesonalInformation setTitle:@"保存个人信息" forState:UIControlStateNormal];
     [self.savePesonalInformation setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.savePesonalInformation addTarget:self action:@selector(clickSave) forControlEvents:UIControlEventTouchUpInside];
     
     //我的收货地址
-    UIButton *shippingAddressButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 66+20+44+20+44+20+44+20+44+20, WIDTH, 44)];
+    UIButton *shippingAddressButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 66+20+44+20+44+20+44+20+44+20, SHPWIDTH, 44)];
     [self.view addSubview:shippingAddressButton];
     shippingAddressButton.backgroundColor = [UIColor whiteColor];
     [shippingAddressButton setTitle:@"我的收货地址" forState:UIControlStateNormal];
-    [shippingAddressButton setTitleColor:MYBLUE forState:UIControlStateNormal];
+    [shippingAddressButton setTitleColor:SHPBLUE forState:UIControlStateNormal];
     [shippingAddressButton addTarget:self action:@selector(clickShippingAddress) forControlEvents:UIControlEventTouchUpInside];
     
     //修改密码
-    UIButton *changePasswordButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 66+20+44+20+44+20+44+20+44+20+44+20, WIDTH, 44)];
+    UIButton *changePasswordButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 66+20+44+20+44+20+44+20+44+20+44+20, SHPWIDTH, 44)];
     [self.view addSubview:changePasswordButton];
     changePasswordButton.backgroundColor = [UIColor whiteColor];
     [changePasswordButton setTitle:@"修改密码" forState:UIControlStateNormal];
-    [changePasswordButton setTitleColor:MYBLUE forState:UIControlStateNormal];
+    [changePasswordButton setTitleColor:SHPBLUE forState:UIControlStateNormal];
  //   [changePasswordButton addTarget:self action:@selector(inputNewPassword) forControlEvents:UIControlEventTouchUpInside];
     
     
     //注销按钮
-    UIButton *logoutButton = [[UIButton alloc] initWithFrame:CGRectMake(0, HEIGHT-(HEIGHT-(66+20+44+20+44+20+44+20+44+20))/2-22, WIDTH, 44)];
+    UIButton *logoutButton = [[UIButton alloc] initWithFrame:CGRectMake(0, SHPHEIGHT-(SHPHEIGHT-(66+20+44+20+44+20+44+20+44+20))/2-22, SHPWIDTH, 44)];
     [logoutButton setTitle:@"注销" forState:UIControlStateNormal];
     [logoutButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    logoutButton.backgroundColor = MYBLUE;
+    logoutButton.backgroundColor = SHPBLUE;
     [self.view addSubview:logoutButton];
     [logoutButton addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
     

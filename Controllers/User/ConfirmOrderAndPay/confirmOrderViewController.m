@@ -8,10 +8,10 @@
 
 #import "confirmOrderViewController.h"
 
-#define WIDTH  (([[UIScreen mainScreen] bounds].size.width))
-#define HEIGHT  (([[UIScreen mainScreen] bounds].size.height))
+#define SHPWIDTH  (([[UIScreen mainScreen] bounds].size.width))
+#define SHPHEIGHT  (([[UIScreen mainScreen] bounds].size.height))
 
-#define MYBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
+#define SHPBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
 
 #define TCIDCMB @"confirmOrderCMB"
 
@@ -34,7 +34,7 @@
 - (instancetype)init{
     if(self = [super init]){
         self.title = @"确认订单";
-        self.view.backgroundColor = MYBLUE;
+        self.view.backgroundColor = SHPBLUE;
     }
     return self;
 }
@@ -52,7 +52,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     //tableview
-    confirmOrderTableView *confirmOrder = [[confirmOrderTableView alloc] initWithFrame:CGRectMake(0, 60, WIDTH, HEIGHT-44-60) style:UITableViewStyleGrouped];
+    confirmOrderTableView *confirmOrder = [[confirmOrderTableView alloc] initWithFrame:CGRectMake(0, 60, SHPWIDTH, SHPHEIGHT-44-60) style:UITableViewStyleGrouped];
     confirmOrder.delegate = self;
     confirmOrder.dataSource = self;
     [confirmOrder registerClass:[UITableViewCell class]forCellReuseIdentifier:TCIDCMB];
@@ -65,22 +65,22 @@
     self.merchantNames = [self findShopNameByMerchantID:self.merchantIDs];
     
     //底边栏
-    UIView *bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT-44, WIDTH, 44)];
+    UIView *bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, SHPHEIGHT-44, SHPWIDTH, 44)];
     bottomBar.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bottomBar];
     
     //提交订单按钮宽度
     CGFloat widthOfsubmitOrderButton= 100;
     //提交订单按钮
-    UIButton *submitOrderButton = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH-widthOfsubmitOrderButton, 0, widthOfsubmitOrderButton, 44)];
+    UIButton *submitOrderButton = [[UIButton alloc] initWithFrame:CGRectMake(SHPWIDTH-widthOfsubmitOrderButton, 0, widthOfsubmitOrderButton, 44)];
     [bottomBar addSubview:submitOrderButton];
-    [submitOrderButton setBackgroundColor:MYBLUE];
+    [submitOrderButton setBackgroundColor:SHPBLUE];
     [submitOrderButton setTitle:@"提交订单" forState:UIControlStateNormal];
     [submitOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [submitOrderButton addTarget:self action:@selector(orderConfirmed) forControlEvents:UIControlEventTouchUpInside];
 
     //总价显示textfeild
-    UITextField *totalPriceTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, WIDTH-widthOfsubmitOrderButton-10, 44)];
+    UITextField *totalPriceTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH-widthOfsubmitOrderButton-10, 44)];
     [bottomBar addSubview:totalPriceTextField];
     totalPriceTextField.textAlignment = NSTextAlignmentRight;
     totalPriceTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
@@ -93,11 +93,11 @@
     }
     NSString *totalPriceString = [[NSString alloc] initWithFormat:@"%.2f",self.totalPrice];
     NSMutableAttributedString *stringForRMB = [[NSMutableAttributedString alloc] initWithString:@"¥"];
-    [stringForRMB addAttribute:NSForegroundColorAttributeName value:MYBLUE range:NSMakeRange(0, 1)];
+    [stringForRMB addAttribute:NSForegroundColorAttributeName value:SHPBLUE range:NSMakeRange(0, 1)];
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:@"合计金额："];
     [string appendAttributedString:stringForRMB];
     NSMutableAttributedString *stringForTotalPrice = [[NSMutableAttributedString alloc] initWithString:totalPriceString];
-    [stringForTotalPrice addAttribute:NSForegroundColorAttributeName value:MYBLUE range:NSMakeRange(0, totalPriceString.length)];
+    [stringForTotalPrice addAttribute:NSForegroundColorAttributeName value:SHPBLUE range:NSMakeRange(0, totalPriceString.length)];
     [stringForTotalPrice addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue" size:30]  range:NSMakeRange(0, totalPriceString.length-3)];
     [string appendAttributedString:stringForTotalPrice];
     
@@ -109,7 +109,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"chongxin");
     shippingAddressTableViewCell *cellDefault = [[shippingAddressTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TCIDCMB];
-    UITableViewCell *cellSelected = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 88)];
+    UITableViewCell *cellSelected = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH, 88)];
     if(!indexPath.section){//地址栏
         if(self.shippingAddressSelected){//被选择
             //根据shippAddressIDReceived查询数据库
@@ -134,11 +134,11 @@
                 }
             }
             if(!defaultExist){//不存在默认地址，则提示选择收货地址
-                UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 88)];
+                UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH, 88)];
                 [cellSelected addSubview:backgroundView];
-                UILabel *displayReminder = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 88)];
+                UILabel *displayReminder = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH, 88)];
                 displayReminder.text = @"选择收货地址";
-                displayReminder.textColor = MYBLUE;
+                displayReminder.textColor = SHPBLUE;
                 displayReminder.textAlignment = NSTextAlignmentCenter;
                 [backgroundView addSubview:displayReminder];
                 return cellSelected;
@@ -204,13 +204,13 @@
 //headerer
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if(section){
-        UITableViewHeaderFooterView *headerOfSection = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 44)];
-        UILabel *shopName = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 44)];
+        UITableViewHeaderFooterView *headerOfSection = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH, 44)];
+        UILabel *shopName = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH, 44)];
         [headerOfSection addSubview:shopName];
         shopName.textAlignment = NSTextAlignmentCenter;
         shopName.text = self.merchantNames[section-1];
         shopName.textColor = [UIColor whiteColor];
-        shopName.backgroundColor = MYBLUE;
+        shopName.backgroundColor = SHPBLUE;
         return headerOfSection;
     }
     return nil;
@@ -227,12 +227,12 @@
         }
         NSString *totalCountString = [[NSString alloc] initWithFormat:@"%lu",(unsigned long)totalCount];
         
-        UITableViewHeaderFooterView *footerOfSection = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 44)];
-        UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 44)];
+        UITableViewHeaderFooterView *footerOfSection = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH, 44)];
+        UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH, 44)];
         backView.backgroundColor = [UIColor whiteColor];
          [footerOfSection addSubview:backView];
         
-        UITextField *footerText = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, WIDTH-20, 44)];
+        UITextField *footerText = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH-20, 44)];
         
 
         [backView addSubview:footerText];
@@ -251,10 +251,10 @@
         }
         NSString *totalPriceString = [[NSString alloc] initWithFormat:@"%.2f",totalPrice];
         NSMutableAttributedString *stringForRMB = [[NSMutableAttributedString alloc] initWithString:@"¥"];
-        [stringForRMB addAttribute:NSForegroundColorAttributeName value:MYBLUE range:NSMakeRange(0, 1)];
+        [stringForRMB addAttribute:NSForegroundColorAttributeName value:SHPBLUE range:NSMakeRange(0, 1)];
         [string appendAttributedString:stringForRMB];
         NSMutableAttributedString *stringForTotalPrice = [[NSMutableAttributedString alloc] initWithString:totalPriceString];
-        [stringForTotalPrice addAttribute:NSForegroundColorAttributeName value:MYBLUE range:NSMakeRange(0, totalPriceString.length)];
+        [stringForTotalPrice addAttribute:NSForegroundColorAttributeName value:SHPBLUE range:NSMakeRange(0, totalPriceString.length)];
         [stringForTotalPrice addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue" size:30]  range:NSMakeRange(0, totalPriceString.length-3)];
         [string appendAttributedString:stringForTotalPrice];
         

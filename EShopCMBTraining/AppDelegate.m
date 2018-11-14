@@ -20,9 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    EShopLoginViewController * eShopLoginViewController= [[EShopLoginViewController alloc] init];
-    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:eShopLoginViewController];
-    self.window.rootViewController = nav;
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[EShopLoginViewController alloc] init]];
     [self.window makeKeyAndVisible];
     return YES;
 }

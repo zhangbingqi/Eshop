@@ -7,9 +7,6 @@
 //
 
 #import "EShopLoginViewController.h"
-#define WIDTH  (([[UIScreen mainScreen] bounds].size.width ))
-#define HEIGHT  (([[UIScreen mainScreen] bounds].size.height))
-#define MYBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
 
 #define ADMINISTRATOR 0
 #define USER 1
@@ -29,23 +26,25 @@
 
 @implementation EShopLoginViewController
 
+- (instancetype)init {
+    self = [super init];
+    if(self) {
+        self.view.backgroundColor = [UIColor blackColor];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
 - (void)viewWillAppear:(BOOL)animated{
 
     self.navigationController.navigationBarHidden=YES;//隐藏UINavigationBar
-    //背景颜色
-    self.view.backgroundColor = [UIColor blackColor];
-    //取屏幕宽和高
-    screenSize *instanceOfScreenSize = [[screenSize alloc] init];
-    CGFloat screenWidth = instanceOfScreenSize.width;
-    CGFloat screenHeight = instanceOfScreenSize.height;
     //输入区位置
-    CGFloat leftBorder = screenWidth/15;
-    CGFloat inputZoneWidth = 13*screenWidth/15;
+    CGFloat leftBorder = SHPWIDTH/15;
+    CGFloat inputZoneWidth = 13*SHPWIDTH/15;
     //账户名输入区域
-    self.inputUserName =[[UITextField alloc] initWithFrame:CGRectMake(leftBorder, screenHeight/4, inputZoneWidth, 44)];
+    self.inputUserName =[[UITextField alloc] initWithFrame:CGRectMake(leftBorder, SHPHEIGHT/4, inputZoneWidth, 44)];
     self.inputUserName.delegate = self;
     //输入账户名颜色
     self.inputUserName.textColor = [UIColor whiteColor];
@@ -67,11 +66,11 @@
     
     [self.view addSubview:self.inputUserName];
     //账户名输入区域下边界线
-    UIView *bottomBoundaryLineUserName=[[UIView alloc] initWithFrame:CGRectMake(leftBorder, screenHeight/4+44,inputZoneWidth,1)];
+    UIView *bottomBoundaryLineUserName=[[UIView alloc] initWithFrame:CGRectMake(leftBorder, SHPHEIGHT/4+44,inputZoneWidth,1)];
     bottomBoundaryLineUserName.backgroundColor=[UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0];
     [self.view addSubview:bottomBoundaryLineUserName];
     //密码输入区域
-    self.inputPassword =[[UITextField alloc] initWithFrame:CGRectMake(leftBorder, screenHeight/4+80, inputZoneWidth, 44)];
+    self.inputPassword =[[UITextField alloc] initWithFrame:CGRectMake(leftBorder, SHPHEIGHT/4+80, inputZoneWidth, 44)];
     [self.view addSubview:self.inputPassword];
     //输入密码颜色
     self.inputPassword.textColor = [UIColor whiteColor];
@@ -81,13 +80,13 @@
                                                  }];
     self.inputPassword.attributedPlaceholder = passwordPlaceholder;
     //密码输入区域下边界线
-    UIView *bottomBoundaryLinePassword=[[UIView alloc] initWithFrame:CGRectMake(leftBorder, screenHeight/4+80+44,inputZoneWidth,1)];
+    UIView *bottomBoundaryLinePassword=[[UIView alloc] initWithFrame:CGRectMake(leftBorder, SHPHEIGHT/4+80+44,inputZoneWidth,1)];
     bottomBoundaryLinePassword.backgroundColor=[UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0];
     [self.view addSubview:bottomBoundaryLinePassword];
     self.inputPassword.delegate = self;
     
     //登录按钮
-    self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(leftBorder, screenHeight/4+180, inputZoneWidth, 44)];
+    self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(leftBorder, SHPHEIGHT/4+180, inputZoneWidth, 44)];
     [self.loginButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     self.loginButton.backgroundColor = [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0];
     [self.loginButton setTitle:@"登 陆" forState:UIControlStateNormal];
@@ -104,22 +103,22 @@
     [self.administratorButton addTarget:self action:@selector(administratorLogin) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.administratorButton];
     self.administratorButton.layer.cornerRadius = 20.0;
-  //  self.administratorButton.backgroundColor = MYBLUE;
+  //  self.administratorButton.backgroundColor = SHPBLUE;
     
     //用户
-    self.userButton = [[UIButton alloc] initWithFrame:CGRectMake(leftBorder, HEIGHT-(HEIGHT-screenHeight/4-180-44)/2-22, WIDTH-2*leftBorder, 44)];
+    self.userButton = [[UIButton alloc] initWithFrame:CGRectMake(leftBorder, SHPHEIGHT-(SHPHEIGHT-SHPHEIGHT/4-180-44)/2-22, SHPWIDTH-2*leftBorder, 44)];
     [self.userButton setTitle:@"我要买东西" forState:UIControlStateNormal];
     [self.userButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.userButton addTarget:self action:@selector(merchantLogin) forControlEvents:UIControlEventTouchUpInside];
-    self.userButton.backgroundColor = MYBLUE;
+    self.userButton.backgroundColor = SHPBLUE;
     self.userButton.layer.cornerRadius = 20.0;
     //商家
-    self.merchantButton = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH-leftBorder-150, HEIGHT-44, 150, 44)];
+    self.merchantButton = [[UIButton alloc] initWithFrame:CGRectMake(SHPWIDTH-leftBorder-150, SHPHEIGHT-44, 150, 44)];
     [self.merchantButton setTitle:@"我是卖东西的" forState:UIControlStateNormal];
     [self.merchantButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.merchantButton addTarget:self action:@selector(userLogin) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.merchantButton];
-    self.merchantButton.backgroundColor = MYBLUE;
+    self.merchantButton.backgroundColor = SHPBLUE;
     self.merchantButton.layer.cornerRadius = 20.0;
     
 }

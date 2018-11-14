@@ -7,7 +7,7 @@
 //
 
 #import "homePageViewController.h"
-#define MYBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
+#define SHPBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
 
 @interface homePageViewController () <UITableViewDataSource,UITableViewDelegate>
 
@@ -21,8 +21,7 @@
     [super viewDidLoad];
     self.merchandiseSort = @[@"Mac",@"iPhone",@"iPad",@"Apple Watch",@"iPod touch",@"配件"];
     self.title = @"选购";
-    screenSize *instanceOfScreenSize = [[screenSize alloc] init];
-    CGRect rect = CGRectMake(0,20, instanceOfScreenSize.width, instanceOfScreenSize.height);
+    CGRect rect = CGRectMake(0,20, SHPWIDTH, SHPHEIGHT);
     showMerchandiseTableView *merchandiseTable = [[showMerchandiseTableView alloc] initWithFrame:rect style:UITableViewStylePlain];
     merchandiseTable.delegate = self;
     merchandiseTable.dataSource = self;
@@ -30,7 +29,7 @@
     [merchandiseTable registerClass:[merchandiseTableViewCell class]forCellReuseIdentifier:tcid];
     [self.view addSubview:merchandiseTable];
    // self.view.backgroundColor=[UIColor whiteColor];
-    self.view.backgroundColor= MYBLUE;
+    self.view.backgroundColor= SHPBLUE;
     // Do any additional setup after loading the view.
 }
 
@@ -40,9 +39,8 @@
 
     merchandiseTableViewCell *cell = [[merchandiseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"asdf"];
     if(indexPath.row==0){
-        screenSize *instanceOfScreenSize = [[screenSize alloc] init];
         UIImage *homeFig = [UIImage imageNamed:@"homePage.png"];
-        UIImageView *homeImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, instanceOfScreenSize.width, instanceOfScreenSize.width/16*9)];
+        UIImageView *homeImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH, SHPWIDTH/16*9)];
         homeImage.image = homeFig;
         [cell addSubview:homeImage];
     }
@@ -66,11 +64,11 @@
 
 // 返回每个 Cell 的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    screenSize *instanceOfScreenSize = [[screenSize alloc] init];
+   
     if(indexPath.row==0){
-        return instanceOfScreenSize.width/16*9;
+        return SHPWIDTH/16*9;
     }
-    return (instanceOfScreenSize.height-88)/4;
+    return (SHPHEIGHT-88)/4;
 };
 
 //选择事件

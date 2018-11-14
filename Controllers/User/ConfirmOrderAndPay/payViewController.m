@@ -10,10 +10,10 @@
 #import "EShopDatabase.h"
 #import "user.h"
 
-#define WIDTH  (([[UIScreen mainScreen] bounds].size.width))
-#define HEIGHT  (([[UIScreen mainScreen] bounds].size.height))
+#define SHPWIDTH  (([[UIScreen mainScreen] bounds].size.width))
+#define SHPHEIGHT  (([[UIScreen mainScreen] bounds].size.height))
 
-#define MYBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
+#define SHPBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
 
 #define orderStateWaitPaiD @"0"
 #define orderStateWaitDelivery @"1"
@@ -43,7 +43,7 @@
     if(self = [super init]){
         NSLog(@"init");
         //背景视图
-        self.payView = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT/3+88, WIDTH, HEIGHT*2/3-88)];
+        self.payView = [[UIView alloc] initWithFrame:CGRectMake(0, SHPHEIGHT/3+88, SHPWIDTH, SHPHEIGHT*2/3-88)];
         self.payView.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:self.payView];
     }
@@ -60,7 +60,7 @@
     self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
     
     //上边栏
-    self.confirmPayLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, 0, WIDTH-88, 44)];
+    self.confirmPayLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, 0, SHPWIDTH-88, 44)];
     self.confirmPayLabel.text = @"确认付款";
     self.confirmPayLabel.textAlignment = NSTextAlignmentCenter;
     [self.payView addSubview:self.confirmPayLabel];
@@ -72,53 +72,53 @@
     [self.payView addSubview:abortButton];
     
     //上边栏分界线
-    UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(0, 44 ,WIDTH,2)];
-    line1.backgroundColor = MYBLUE;
+    UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(0, 44 ,SHPWIDTH,2)];
+    line1.backgroundColor = SHPBLUE;
     [self.payView addSubview:line1];
     
     //金额栏
     NSLog(@"%f",self.amount);
-    self.amountLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 44+2, WIDTH, 77)];
+    self.amountLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 44+2, SHPWIDTH, 77)];
     self.amountLabel.textAlignment = NSTextAlignmentCenter;
     self.amountLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:38];
     [self.payView addSubview:self.amountLabel];
     
     //账户名
-    UIView *accountNameView = [[UIView alloc] initWithFrame:CGRectMake(0, 44+2+77, WIDTH, 40)];
+    UIView *accountNameView = [[UIView alloc] initWithFrame:CGRectMake(0, 44+2+77, SHPWIDTH, 40)];
     [self.payView addSubview:accountNameView];
     
     UILabel *amountLabelLeft = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 100, 40)];
     [accountNameView addSubview:amountLabelLeft];
     amountLabelLeft.text = @"账户名";
-    self.accountNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15+100, 0, WIDTH-15-100-15-15, 40)];
+    self.accountNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15+100, 0, SHPWIDTH-15-100-15-15, 40)];
     [accountNameView addSubview:self.accountNameLabel];
     self.accountNameLabel.textAlignment = NSTextAlignmentRight;
     
     
     //分界线
-    UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(15, 44 +2+77+40,WIDTH-30,2)];
-    line2.backgroundColor = MYBLUE;
+    UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(15, 44 +2+77+40,SHPWIDTH-30,2)];
+    line2.backgroundColor = SHPBLUE;
     [self.payView addSubview:line2];
     
     //付款方式
-    UIView *paymentMethodView = [[UIView alloc] initWithFrame:CGRectMake(0, 44+2+77+40+2, WIDTH, 40)];
+    UIView *paymentMethodView = [[UIView alloc] initWithFrame:CGRectMake(0, 44+2+77+40+2, SHPWIDTH, 40)];
     [self.payView addSubview:paymentMethodView];
     UILabel *paymentMethodLabelLeft = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 100, 40)];
     paymentMethodLabelLeft.text = @"付款方式";
     [paymentMethodView addSubview:paymentMethodLabelLeft];
-    self.paymentMethodButton = [[UIButton alloc] initWithFrame:CGRectMake(15+100, 0, WIDTH-15-100-15-10, 40)];
+    self.paymentMethodButton = [[UIButton alloc] initWithFrame:CGRectMake(15+100, 0, SHPWIDTH-15-100-15-10, 40)];
     [paymentMethodView addSubview:self.paymentMethodButton];
     [self.paymentMethodButton addTarget:self action:@selector(optionOfPayment) forControlEvents:UIControlEventTouchUpInside];
     [self.paymentMethodButton setTitle:self.payMethodSelectedResult forState:UIControlStateNormal];
     self.paymentMethodButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [self.paymentMethodButton setTitleColor:MYBLUE forState:UIControlStateNormal];
+    [self.paymentMethodButton setTitleColor:SHPBLUE forState:UIControlStateNormal];
     
     //viewForPicker
-    self.viewForPicker = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT/3+88, WIDTH, HEIGHT*2/3-88)];
+    self.viewForPicker = [[UIView alloc] initWithFrame:CGRectMake(0, SHPHEIGHT/3+88, SHPWIDTH, SHPHEIGHT*2/3-88)];
     self.viewForPicker.backgroundColor = [UIColor whiteColor];
     
     //上边栏
-    UILabel *pickerTitle = [[UILabel alloc] initWithFrame:CGRectMake(44, 0, WIDTH-88, 44)];
+    UILabel *pickerTitle = [[UILabel alloc] initWithFrame:CGRectMake(44, 0, SHPWIDTH-88, 44)];
     pickerTitle.text = @"请选择支付方式";
     pickerTitle.textAlignment = NSTextAlignmentCenter;
     [self.viewForPicker addSubview:pickerTitle];
@@ -132,27 +132,27 @@
     [self.viewForPicker addSubview:line1];
     
     //pickerview
-    self.paymentMethodPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 44, WIDTH, 40*3*2)];
+    self.paymentMethodPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 44, SHPWIDTH, 40*3*2)];
     self.paymentMethodPickerView.delegate = self;
     self.paymentMethodPickerView.dataSource  = self;
     self.paymentMethodPickerView.showsSelectionIndicator = YES;
     [self.viewForPicker addSubview:self.paymentMethodPickerView];
     
     //确定选择付款方式
-    UIButton *confirmPayMethod = [[UIButton alloc] initWithFrame:CGRectMake(15,HEIGHT*2/3-88-39-15, WIDTH-15*2, 39)];
+    UIButton *confirmPayMethod = [[UIButton alloc] initWithFrame:CGRectMake(15,SHPHEIGHT*2/3-88-39-15, SHPWIDTH-15*2, 39)];
     confirmPayMethod.layer.cornerRadius = 3;
     [confirmPayMethod setTitle:@"确定" forState:UIControlStateNormal];
-    confirmPayMethod.backgroundColor = MYBLUE;
+    confirmPayMethod.backgroundColor = SHPBLUE;
     [self.viewForPicker addSubview:confirmPayMethod];
     [confirmPayMethod addTarget:self action:@selector(confirmPayMethod) forControlEvents:UIControlEventTouchUpInside];
     
     //分界线
-    UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(15, 44 +2+77+40+2+40,WIDTH-30,2)];
-    line3.backgroundColor = MYBLUE;
+    UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(15, 44 +2+77+40+2+40,SHPWIDTH-30,2)];
+    line3.backgroundColor = SHPBLUE;
     [self.payView addSubview:line3];
     
     //密码二次确认
-    self.inputPassword = [[UITextField alloc] initWithFrame:CGRectMake(15, 44 +2+77+40+2+40+2, WIDTH-30, 44)];
+    self.inputPassword = [[UITextField alloc] initWithFrame:CGRectMake(15, 44 +2+77+40+2+40+2, SHPWIDTH-30, 44)];
     self.inputPassword.delegate = self;
     self.inputPassword.placeholder = @"请输入密码";
     //self.inputPassword.text = @"1";
@@ -160,15 +160,15 @@
   //  [self.inputPassword addTarget:self action:@selector(inputPasswordDone)  forControlEvents:UIControlEventEditingDidEnd];
     
     //分界线
-    UIView *line4 = [[UIView alloc] initWithFrame:CGRectMake(15, 44+2+77+40+2+40+2+44, WIDTH-30,2)];
-    line4.backgroundColor = MYBLUE;
+    UIView *line4 = [[UIView alloc] initWithFrame:CGRectMake(15, 44+2+77+40+2+40+2+44, SHPWIDTH-30,2)];
+    line4.backgroundColor = SHPBLUE;
     [self.payView addSubview:line4];
     
     //立即付款按钮
-    self.payButton = [[UIButton alloc] initWithFrame:CGRectMake(15,HEIGHT*2/3-88-39-15, WIDTH-15*2, 39)];
+    self.payButton = [[UIButton alloc] initWithFrame:CGRectMake(15,SHPHEIGHT*2/3-88-39-15, SHPWIDTH-15*2, 39)];
     self.payButton.layer.cornerRadius = 3;
     [self.payButton setTitle:@"立即付款" forState:UIControlStateNormal];
-    self.payButton.backgroundColor = MYBLUE;
+    self.payButton.backgroundColor = SHPBLUE;
     [self.payView addSubview:self.payButton];
     [self.payButton addTarget:self action:@selector(clickPayButton) forControlEvents:UIControlEventTouchUpInside];
     
@@ -217,7 +217,7 @@
 
 //每一列组件的列宽度
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component{
-    return WIDTH-30;
+    return SHPWIDTH-30;
 };
 
 ////每一列组件的行高度
@@ -262,7 +262,7 @@
     //获取键盘的高度
     CGRect rectOfKeyBoard =[notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGFloat heightOfKeyBoard=rectOfKeyBoard.size.height;
-    UIView *tmpView = [[UIView alloc]initWithFrame:CGRectMake(0, HEIGHT/3+88 - heightOfKeyBoard, WIDTH, HEIGHT*2/3-88)];
+    UIView *tmpView = [[UIView alloc]initWithFrame:CGRectMake(0, SHPHEIGHT/3+88 - heightOfKeyBoard, SHPWIDTH, SHPHEIGHT*2/3-88)];
     [UIView animateWithDuration:.2 animations:^{
         self.payView.frame= tmpView.frame;
     }];
@@ -270,7 +270,7 @@
 
 //键盘隐藏时调用
 -(void)keyBoardHiden:(NSNotification *)notification{
-    UIView *tmpView = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT/3+88, WIDTH, HEIGHT*2/3-88)];
+    UIView *tmpView = [[UIView alloc] initWithFrame:CGRectMake(0, SHPHEIGHT/3+88, SHPWIDTH, SHPHEIGHT*2/3-88)];
     self.payView.frame=tmpView.frame;
 }
 

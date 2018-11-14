@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "screenSize.h"
 #import "EShopLoginViewController.h"
 #import "shippingAddressViewController.h"
 @interface orderManagerViewController : UIViewController

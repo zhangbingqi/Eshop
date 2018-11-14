@@ -8,10 +8,6 @@
 
 #import "orderManagerViewController.h"
 
-#define WIDTH  (([[UIScreen mainScreen] bounds].size.width-30 ))
-#define HEIGHT  (([[UIScreen mainScreen] bounds].size.height))
-#define MYBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
-
 #define orderStateWaitPaiD 0
 #define orderStateWaitDelivery 1
 #define orderStateShipped 2
@@ -33,23 +29,23 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"我的订单";
     NSArray *orderState = @[@"全部",@"待付款",@"待发货",@"待收货",@"已完成"];
-    UIButton *allOrderLabel = [[UIButton alloc] initWithFrame:CGRectMake(15, 66, WIDTH/5, 39)];
-    UIButton *orderStateWaitPaiDLabel = [[UIButton alloc] initWithFrame:CGRectMake(15+WIDTH/5, 66, WIDTH/5, 39)];
-    UIButton *orderStateWaitDeliveryLabel = [[UIButton alloc] initWithFrame:CGRectMake(15+2*WIDTH/5, 66, WIDTH/5, 39)];
-    UIButton *orderStateShippedLabel = [[UIButton alloc] initWithFrame:CGRectMake(15+3*WIDTH/5, 66, WIDTH/5, 39)];
-    UIButton *orderStateFinishedLabel = [[UIButton alloc] initWithFrame:CGRectMake(15+4*WIDTH/5, 66, WIDTH/5, 39)];
+    UIButton *allOrderLabel = [[UIButton alloc] initWithFrame:CGRectMake(15, 66, SHPWIDTH/5, 39)];
+    UIButton *orderStateWaitPaiDLabel = [[UIButton alloc] initWithFrame:CGRectMake(15+SHPWIDTH/5, 66, SHPWIDTH/5, 39)];
+    UIButton *orderStateWaitDeliveryLabel = [[UIButton alloc] initWithFrame:CGRectMake(15+2*SHPWIDTH/5, 66, SHPWIDTH/5, 39)];
+    UIButton *orderStateShippedLabel = [[UIButton alloc] initWithFrame:CGRectMake(15+3*SHPWIDTH/5, 66, SHPWIDTH/5, 39)];
+    UIButton *orderStateFinishedLabel = [[UIButton alloc] initWithFrame:CGRectMake(15+4*SHPWIDTH/5, 66, SHPWIDTH/5, 39)];
     self.orderStateButton = @[allOrderLabel,orderStateWaitPaiDLabel,orderStateWaitDeliveryLabel,orderStateShippedLabel,orderStateFinishedLabel];
     for(NSUInteger it=0;it<orderState.count;it++){
         [((UIButton *)self.orderStateButton[it]) setTitle:orderState[it] forState:UIControlStateNormal]; //文本
         [((UIButton *)self.orderStateButton[it]) setTitleColor:[UIColor blackColor] forState:UIControlStateNormal]; //文本颜色
-        [((UIButton *)self.orderStateButton[it]) setTitleColor:MYBLUE forState:UIControlStateSelected];//
+        [((UIButton *)self.orderStateButton[it]) setTitleColor:SHPBLUE forState:UIControlStateSelected];//
         [self.view addSubview:self.orderStateButton[it]];
         ((UIButton *)self.orderStateButton[it]).tag = it;
         [((UIButton *)self.orderStateButton[it]) addTarget:self action:@selector(showOrder:) forControlEvents:UIControlEventTouchUpInside];
     }
     //分界线
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 66+38,WIDTH+30,2)];
-    line.backgroundColor = MYBLUE;
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 66+38,SHPWIDTH+30,2)];
+    line.backgroundColor = SHPBLUE;
     [self.view addSubview:line];
     
 
@@ -73,7 +69,7 @@
     }
     
     //tableview
-    self.orderTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 66+39, WIDTH+30, HEIGHT-66-39) style:UITableViewStyleGrouped];
+    self.orderTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 66+39, SHPWIDTH+30, SHPHEIGHT-66-39) style:UITableViewStyleGrouped];
     self.orderTableView.delegate = self;
     self.orderTableView.dataSource = self;
     [self.orderTableView registerClass:[confirmOrderTableViewCell class]forCellReuseIdentifier:CELLREUSEIDENTIFIER];
@@ -173,9 +169,9 @@
     
     //UI部分
     UITableViewHeaderFooterView *headerView = [[UITableViewHeaderFooterView alloc] init];
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH+30, 44)];
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH+30, 44)];
     [headerView addSubview:backView];
-    UILabel *shopNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, WIDTH-100, 44)];
+    UILabel *shopNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, SHPWIDTH-100, 44)];
     shopNameLabel.backgroundColor = [UIColor whiteColor];
     NSString *accountNameDisplay = [[NSString alloc] initWithFormat:@"购买账户：%@",accountName ];
     [shopNameLabel setText:accountNameDisplay];
@@ -211,12 +207,12 @@
     NSUInteger orderState = [aOrderForm.orderState integerValue];
     
     //UI部分
-    UITableViewHeaderFooterView *footerView = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, WIDTH+30, 44)];
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH+30, 44)];
+    UITableViewHeaderFooterView *footerView = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH+30, 44)];
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH+30, 44)];
     backView.backgroundColor = [UIColor whiteColor];
     [footerView addSubview:backView];
     
-    UITextField *footerText = [[UITextField alloc] initWithFrame:CGRectMake(150, 0, WIDTH+15-150, 44)];
+    UITextField *footerText = [[UITextField alloc] initWithFrame:CGRectMake(150, 0, SHPWIDTH+15-150, 44)];
     [backView addSubview:footerText];
     footerText.textAlignment = NSTextAlignmentRight;
     footerText.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
@@ -237,9 +233,9 @@
     
     //状态和操作按钮
     UILabel *orderStateLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 150, 44)];
-    orderStateLabel.backgroundColor= MYBLUE;
+    orderStateLabel.backgroundColor= SHPBLUE;
      UIButton *orderStateButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, 150, 44)];
-    orderStateButton.backgroundColor =MYBLUE;
+    orderStateButton.backgroundColor =SHPBLUE;
     orderStateLabel.textAlignment = NSTextAlignmentCenter;
     if(orderState == orderStateWaitPaiD){
         orderStateLabel.text = @"等待买家付款";

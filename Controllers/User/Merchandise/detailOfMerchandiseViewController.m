@@ -7,9 +7,9 @@
 //
 
 #import "detailOfMerchandiseViewController.h"
-#define WIDTH  (([[UIScreen mainScreen] bounds].size.width))
-#define HEIGHT  (([[UIScreen mainScreen] bounds].size.height))
-#define MYBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
+#define SHPWIDTH  (([[UIScreen mainScreen] bounds].size.width))
+#define SHPHEIGHT  (([[UIScreen mainScreen] bounds].size.height))
+#define SHPBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
 @interface detailOfMerchandiseViewController () <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
 @property NSArray *merchandiseDetail;
@@ -41,7 +41,7 @@
     self.merchandiseDetail = [db selectAllColumnFromTable:@"merchandise" where:conditionDict];
     
     //tablewiew
-    CGRect rect = CGRectMake(0,20, WIDTH, HEIGHT-20);
+    CGRect rect = CGRectMake(0,20, SHPWIDTH, SHPHEIGHT-20);
     self.merchandiseDetailTable = [[showMerchandiseTableView alloc] initWithFrame:rect style:UITableViewStylePlain];
     self.merchandiseDetailTable.delegate = self;
     self.merchandiseDetailTable.dataSource = self;
@@ -136,24 +136,24 @@
 //点击购买 显示库存数量并输入购买数量及确认
 - (void) bottomPopInputCountToBuy:(UIButton *)button{
     
-    CGRect rect = CGRectMake(0,20, WIDTH, HEIGHT-88-20);
+    CGRect rect = CGRectMake(0,20, SHPWIDTH, SHPHEIGHT-88-20);
     self.merchandiseDetailTable.frame = rect;
     
     //弹出页面
-    self.showQuantityAndInputCountToBuy = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT-88, WIDTH, 88)];
+    self.showQuantityAndInputCountToBuy = [[UIView alloc] initWithFrame:CGRectMake(0, SHPHEIGHT-88, SHPWIDTH, 88)];
     self.showQuantityAndInputCountToBuy.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.showQuantityAndInputCountToBuy];
     //确定按钮
-    UIButton *turnToComfirmOrder = [[UIButton alloc] initWithFrame:CGRectMake(10, 46, WIDTH-20, 40)];
+    UIButton *turnToComfirmOrder = [[UIButton alloc] initWithFrame:CGRectMake(10, 46, SHPWIDTH-20, 40)];
     [self.showQuantityAndInputCountToBuy addSubview:turnToComfirmOrder];
     turnToComfirmOrder.layer.cornerRadius = 20.0;
-    turnToComfirmOrder.backgroundColor = MYBLUE;
+    turnToComfirmOrder.backgroundColor = SHPBLUE;
     [turnToComfirmOrder setTitle:@"确定" forState:UIControlStateNormal];
     self.merchandiseIndex = button.tag;
     [turnToComfirmOrder addTarget:self action:@selector(clickConfirmButton) forControlEvents:UIControlEventTouchUpInside];
     
     //显示库存
-    UILabel *showQuantity = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, WIDTH-10-88, 44)];
+    UILabel *showQuantity = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, SHPWIDTH-10-88, 44)];
     [showQuantity setBackgroundColor: [UIColor whiteColor]];
     self.merchandiseIndex = button.tag;
     merchandise *aMerchnadise = self.merchandiseDetail[button.tag];
@@ -162,7 +162,7 @@
     [self.showQuantityAndInputCountToBuy addSubview:showQuantity];
     
     //输入数量
-    self.inputCountToBuy = [[UITextField alloc] initWithFrame:CGRectMake(WIDTH-44-22-10, 11, 44, 22)];
+    self.inputCountToBuy = [[UITextField alloc] initWithFrame:CGRectMake(SHPWIDTH-44-22-10, 11, 44, 22)];
     self.inputCountToBuy.delegate =self;
     self.inputCountToBuy.text = @"1";
     self.inputCountToBuy.textAlignment = NSTextAlignmentCenter;
@@ -173,22 +173,22 @@
     [self.inputCountToBuy addTarget:self action:@selector(countTextFieldDidChange:)  forControlEvents:UIControlEventEditingDidEnd];
     
     //减一按钮
-    UIButton *countDec = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH-22-44-22-10, 11, 22, 22)];
+    UIButton *countDec = [[UIButton alloc] initWithFrame:CGRectMake(SHPWIDTH-22-44-22-10, 11, 22, 22)];
     countDec.layer.borderWidth = 1.0;
     countDec.layer.cornerRadius = 3.0;
     [countDec setTitle:@"-" forState:UIControlStateNormal];
-    [countDec setTitleColor:MYBLUE forState:UIControlStateNormal];
-    countDec.layer.borderColor = [MYBLUE CGColor];//设置边框颜色
+    [countDec setTitleColor:SHPBLUE forState:UIControlStateNormal];
+    countDec.layer.borderColor = [SHPBLUE CGColor];//设置边框颜色
     [self.showQuantityAndInputCountToBuy addSubview:countDec];
     [countDec addTarget:self action:@selector(clickCountDec) forControlEvents:UIControlEventTouchUpInside];
     
     //加一按钮
-    UIButton *countInc = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH-22-10, 11,22, 22)];
+    UIButton *countInc = [[UIButton alloc] initWithFrame:CGRectMake(SHPWIDTH-22-10, 11,22, 22)];
     countInc.layer.borderWidth = 1.0;
     countInc.layer.cornerRadius = 3.0;
     [countInc setTitle:@"+" forState:UIControlStateNormal];
-    [countInc setTitleColor:MYBLUE forState:UIControlStateNormal];
-    countInc.layer.borderColor = [MYBLUE CGColor];//设置边框颜色
+    [countInc setTitleColor:SHPBLUE forState:UIControlStateNormal];
+    countInc.layer.borderColor = [SHPBLUE CGColor];//设置边框颜色
     [self.showQuantityAndInputCountToBuy addSubview:countInc];
     countInc.tag = quantity;
     [countInc addTarget:self action:@selector(clickCountInc:) forControlEvents:UIControlEventTouchUpInside];
@@ -218,7 +218,7 @@
     //获取键盘的高度
     CGRect rectOfKeyBoard =[notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGFloat heightOfKeyBoard=rectOfKeyBoard.size.height;
-    UIView *tmpView = [[UIView alloc]initWithFrame:CGRectMake(0, HEIGHT-44-heightOfKeyBoard, WIDTH, 88)];
+    UIView *tmpView = [[UIView alloc]initWithFrame:CGRectMake(0, SHPHEIGHT-44-heightOfKeyBoard, SHPWIDTH, 88)];
     [UIView animateWithDuration:.2 animations:^{
         self.showQuantityAndInputCountToBuy.frame= tmpView.frame;
     }];
@@ -226,13 +226,13 @@
 
 //键盘隐藏时调用
 -(void)keyBoardHiden:(NSNotification *)notification{
-    UIView *tmpView = [[UIView alloc]initWithFrame:CGRectMake(0, HEIGHT-88, WIDTH, 88)];
+    UIView *tmpView = [[UIView alloc]initWithFrame:CGRectMake(0, SHPHEIGHT-88, SHPWIDTH, 88)];
     self.showQuantityAndInputCountToBuy.frame=tmpView.frame;
 }
 
 // 返回每个 Cell 的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return HEIGHT/2;
+    return SHPHEIGHT/2;
 };
 
 

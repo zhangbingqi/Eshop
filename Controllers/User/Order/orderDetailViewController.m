@@ -8,10 +8,6 @@
 
 #import "orderDetailViewController.h"
 
-#define WIDTH  (([[UIScreen mainScreen] bounds].size.width ))
-#define HEIGHT  (([[UIScreen mainScreen] bounds].size.height))
-#define MYBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
-
 #define CELLREUSEIDENTIFIER @"orderdetial"
 
 @interface orderDetailViewController () <UITableViewDataSource,UITableViewDelegate>
@@ -46,7 +42,7 @@
     //    }
     
     //tableView
-    self.orderDetailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64) style:UITableViewStyleGrouped];
+    self.orderDetailTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SHPWIDTH, SHPHEIGHT-64) style:UITableViewStyleGrouped];
     self.orderDetailTableView.delegate = self;
     self.orderDetailTableView.dataSource = self;
     [self.orderDetailTableView registerClass:[confirmOrderTableViewCell class]forCellReuseIdentifier:CELLREUSEIDENTIFIER];
@@ -147,9 +143,9 @@
         
         //UI部分
         UITableViewHeaderFooterView *headerView = [[UITableViewHeaderFooterView alloc] init];
-        UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 44)];
+        UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH, 44)];
         [headerView addSubview:backView];
-        UILabel *shopNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, WIDTH-100, 44)];
+        UILabel *shopNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, SHPWIDTH-100, 44)];
         shopNameLabel.backgroundColor = [UIColor whiteColor];
         [shopNameLabel setText:shopNameString];
         [backView addSubview:shopNameLabel];
@@ -179,12 +175,12 @@
         float totalPrice = [aOrderForm.orderPrice floatValue];
         
         //UI部分
-        UITableViewHeaderFooterView *footerView = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(15, 0, WIDTH-30, 44)];
-        UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 44)];
+        UITableViewHeaderFooterView *footerView = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(15, 0, SHPWIDTH-30, 44)];
+        UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH, 44)];
         backView.backgroundColor = [UIColor whiteColor];
         [footerView addSubview:backView];
         
-        UITextField *footerText = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, WIDTH-20, 44)];
+        UITextField *footerText = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH-20, 44)];
         [backView addSubview:footerText];
         footerText.textAlignment = NSTextAlignmentRight;
         footerText.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;

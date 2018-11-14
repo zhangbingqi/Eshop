@@ -7,8 +7,8 @@
 //
 
 #import "secondLevelDirectoryTableViewCell.h"
-#define WIDTH  (([[UIScreen mainScreen] bounds].size.width))
-#define HEIGHT  (([[UIScreen mainScreen] bounds].size.height))
+#define SHPWIDTH  (([[UIScreen mainScreen] bounds].size.width))
+#define SHPHEIGHT  (([[UIScreen mainScreen] bounds].size.height))
 
 @implementation secondLevelDirectoryTableViewCell
 
@@ -16,8 +16,8 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
-    self.cellImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, (HEIGHT-66)/9*1.25, (HEIGHT-66)/9)];
-    self.cellLabel = [[UILabel alloc] initWithFrame:CGRectMake((HEIGHT-66)/9*1.25, (HEIGHT-66)/18-22, WIDTH,44)];
+    self.cellImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, (SHPHEIGHT-66)/9*1.25, (SHPHEIGHT-66)/9)];
+    self.cellLabel = [[UILabel alloc] initWithFrame:CGRectMake((SHPHEIGHT-66)/9*1.25, (SHPHEIGHT-66)/18-22, SHPWIDTH,44)];
     [self addSubview:self.cellImage];
     [self addSubview:self.cellLabel];
     self.cellLabel.textColor= [UIColor blackColor];

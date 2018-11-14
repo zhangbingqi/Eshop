@@ -8,21 +8,21 @@
 
 #import "merchandiseSortNameTableViewCell.h"
 
-#define WIDTH  (([[UIScreen mainScreen] bounds].size.width))
-#define HEIGHT  (([[UIScreen mainScreen] bounds].size.height))
+#define SHPWIDTH  (([[UIScreen mainScreen] bounds].size.width))
+#define SHPHEIGHT  (([[UIScreen mainScreen] bounds].size.height))
 
-#define MYBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
+#define SHPBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
 
 @implementation merchandiseSortNameTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]){
-        self.merchantSortNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, WIDTH/2,44)];
-        self.merchantSortNameLabel.textColor = MYBLUE;
+        self.merchantSortNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, SHPWIDTH/2,44)];
+        self.merchantSortNameLabel.textColor = SHPBLUE;
        // self.merchantSortNameLabel.backgroundColor = [UIColor whiteColor];
 
-        self.merchantNumberInSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH/2, 0, WIDTH/2-15, 44)];
+        self.merchantNumberInSortLabel = [[UILabel alloc] initWithFrame:CGRectMake(SHPWIDTH/2, 0, SHPWIDTH/2-15, 44)];
         self.merchantNumberInSortLabel.textColor = [UIColor whiteColor];
       //  self.merchantSortNameLabel.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.merchantSortNameLabel];

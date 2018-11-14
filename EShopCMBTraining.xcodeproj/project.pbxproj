@@ -50,7 +50,6 @@
 		594C70782101D78900D74682 /* mineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 594C70772101D78900D74682 /* mineViewController.m */; };
 		594C707B2101D7AF00D74682 /* shoppingCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 594C707A2101D7AF00D74682 /* shoppingCartViewController.m */; };
 		594C707E2101D7C400D74682 /* orderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 594C707D2101D7C400D74682 /* orderViewController.m */; };
-		594C70872101FC1300D74682 /* screenSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 594C70862101FC1300D74682 /* screenSize.m */; };
 		594C7093210578A500D74682 /* showMerchandiseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 594C7092210578A500D74682 /* showMerchandiseTableView.m */; };
 		594C70992105A71700D74682 /* merchandiseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 594C70982105A71700D74682 /* merchandiseTableViewCell.m */; };
 		594C70B32105FCA600D74682 /* timg.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 594C709B2105C10000D74682 /* timg.jpeg */; };
@@ -115,6 +114,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		53D136F9219BFB2400889924 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		5926F112210B3C490059E64E /* shippingAddressTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shippingAddressTableViewCell.h; sourceTree = "<group>"; };
 		5926F113210B3C490059E64E /* shippingAddressTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = shippingAddressTableViewCell.m; sourceTree = "<group>"; };
 		5926F115210B48520059E64E /* shippingAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shippingAddress.h; sourceTree = "<group>"; };
@@ -198,8 +198,6 @@
 		594C707A2101D7AF00D74682 /* shoppingCartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = shoppingCartViewController.m; sourceTree = "<group>"; };
 		594C707C2101D7C400D74682 /* orderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = orderViewController.h; sourceTree = "<group>"; };
 		594C707D2101D7C400D74682 /* orderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = orderViewController.m; sourceTree = "<group>"; };
-		594C70852101FC1300D74682 /* screenSize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = screenSize.h; sourceTree = "<group>"; };
-		594C70862101FC1300D74682 /* screenSize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = screenSize.m; sourceTree = "<group>"; };
 		594C7091210578A500D74682 /* showMerchandiseTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = showMerchandiseTableView.h; sourceTree = "<group>"; };
 		594C7092210578A500D74682 /* showMerchandiseTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = showMerchandiseTableView.m; sourceTree = "<group>"; };
 		594C70972105A71700D74682 /* merchandiseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = merchandiseTableViewCell.h; sourceTree = "<group>"; };
@@ -583,6 +581,7 @@
 		594C700721006DA600D74682 /* EShopCMBTraining */ = {
 			isa = PBXGroup;
 			children = (
+				53D136F9219BFB2400889924 /* PrefixHeader.pch */,
 				594C700821006DA600D74682 /* AppDelegate.h */,
 				594C700921006DA600D74682 /* AppDelegate.m */,
 				594C700B21006DA600D74682 /* ViewController.h */,
@@ -645,8 +644,6 @@
 				594C70612101798900D74682 /* user.m */,
 				594C706A2101CD5D00D74682 /* loginHistory.h */,
 				594C706B2101CD5D00D74682 /* loginHistory.m */,
-				594C70852101FC1300D74682 /* screenSize.h */,
-				594C70862101FC1300D74682 /* screenSize.m */,
 				594C70DE2106BCFD00D74682 /* merchandise.h */,
 				594C70DF2106BCFD00D74682 /* merchandise.m */,
 				594C7111210738F600D74682 /* shoppingCart.h */,
@@ -950,7 +947,6 @@
 				5926F1A2210EBDAB0059E64E /* detailMerchandiseManagerViewController.m in Sources */,
 				5926F146210DAB6A0059E64E /* orderStateAndShippingAddressTableViewCell.m in Sources */,
 				594C704021006EB400D74682 /* EShopDatabase.m in Sources */,
-				594C70872101FC1300D74682 /* screenSize.m in Sources */,
 				5926F18B210E6D750059E64E /* merchandiseManagerViewController.m in Sources */,
 				594C711F2107633E00D74682 /* confirmOrderTableView.m in Sources */,
 				5926F177210E14AA0059E64E /* logoutAdminViewController.m in Sources */,
@@ -1127,6 +1123,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DH59R4RNRY;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = EShopCMBTraining/PrefixHeader.pch;
 				INFOPLIST_FILE = EShopCMBTraining/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1144,6 +1142,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DH59R4RNRY;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = EShopCMBTraining/PrefixHeader.pch;
 				INFOPLIST_FILE = EShopCMBTraining/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

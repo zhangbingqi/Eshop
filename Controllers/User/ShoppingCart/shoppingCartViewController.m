@@ -7,10 +7,10 @@
 //
 
 #import "shoppingCartViewController.h"
-#define WIDTH  (([[UIScreen mainScreen] bounds].size.width))
-#define HEIGHT  (([[UIScreen mainScreen] bounds].size.height))
+#define SHPWIDTH  (([[UIScreen mainScreen] bounds].size.width))
+#define SHPHEIGHT  (([[UIScreen mainScreen] bounds].size.height))
 
-#define MYBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
+#define SHPBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
 
 #define NSNO (( [[NSNumber alloc] initWithBool:NO] ))
 #define NSYES (( [[NSNumber alloc] initWithBool:YES] ))
@@ -104,11 +104,11 @@
     
     //顶部栏
     CGFloat cutLineBetweenheaderAndTable = 64.0;
-    UIView *shoppingCartHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, cutLineBetweenheaderAndTable)];
-    self.view.backgroundColor = MYBLUE;
+    UIView *shoppingCartHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH, cutLineBetweenheaderAndTable)];
+    self.view.backgroundColor = SHPBLUE;
     [self.view addSubview:shoppingCartHeader];
     
-    self.headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, WIDTH, cutLineBetweenheaderAndTable-20)];
+    self.headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, SHPWIDTH, cutLineBetweenheaderAndTable-20)];
     NSInteger countOfmerchandiseInShoppingCart = [self.merchandiseIDAndCount count];
     if(countOfmerchandiseInShoppingCart){
         self.headerTitle.text = [NSString stringWithFormat:@"购物车(%ld)",(long)countOfmerchandiseInShoppingCart];
@@ -121,18 +121,18 @@
     
     
     //tableview
-    self.shoppingCart = [[shoppingCartTableView alloc] initWithFrame:CGRectMake(0, cutLineBetweenheaderAndTable, WIDTH, HEIGHT-cutLineBetweenheaderAndTable-bottomHeight*2) style:UITableViewStyleGrouped];
+    self.shoppingCart = [[shoppingCartTableView alloc] initWithFrame:CGRectMake(0, cutLineBetweenheaderAndTable, SHPWIDTH, SHPHEIGHT-cutLineBetweenheaderAndTable-bottomHeight*2) style:UITableViewStyleGrouped];
     self.shoppingCart.delegate = self;
     self.shoppingCart.dataSource = self;
     //shoppingCart.backgroundColor = [UIColor whiteColor];
     NSString * tcid = @"asdf";
     [self.shoppingCart registerClass:[shoppingCartTableViewCell class]forCellReuseIdentifier:tcid];
-    self.emptyShoppingCart = [[UILabel alloc] initWithFrame:CGRectMake(0, HEIGHT/2-22, WIDTH, 44)];
+    self.emptyShoppingCart = [[UILabel alloc] initWithFrame:CGRectMake(0, SHPHEIGHT/2-22, SHPWIDTH, 44)];
     self.emptyShoppingCart.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.emptyShoppingCart];
     
     //底部栏
-    self.bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT-bottomHeight*2, WIDTH, bottomHeight)];
+    self.bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, SHPHEIGHT-bottomHeight*2, SHPWIDTH, bottomHeight)];
     self.bottomBar.backgroundColor = [UIColor whiteColor];
     self.emptyShoppingCart.text = @"你的购物车空空如也，快去采购吧~";
     if([self.merchandiseInShoppingCart count]){
@@ -154,9 +154,9 @@
     
     //结算button
     CGFloat buyViaShoppingCartButtonWidth = 100;
-    self.buyViaShoppingCart = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH-buyViaShoppingCartButtonWidth-15, bottomHeight/2-22, buyViaShoppingCartButtonWidth, 44)];
+    self.buyViaShoppingCart = [[UIButton alloc] initWithFrame:CGRectMake(SHPWIDTH-buyViaShoppingCartButtonWidth-15, bottomHeight/2-22, buyViaShoppingCartButtonWidth, 44)];
     [self.buyViaShoppingCart addTarget:self action:@selector(turnToConfirmOrder) forControlEvents:UIControlEventTouchUpInside];
-    self.buyViaShoppingCart.backgroundColor = MYBLUE;
+    self.buyViaShoppingCart.backgroundColor = SHPBLUE;
     NSString *willBuyCount = [[NSString alloc] initWithFormat:@"结算(%ld)",(long)self.selectedCount];
     [self.buyViaShoppingCart setTitle:willBuyCount forState:UIControlStateNormal];
     [self.buyViaShoppingCart setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -164,7 +164,7 @@
     self.buyViaShoppingCart.layer.cornerRadius = 22;
     
     //合计label
-    self.total = [[UILabel alloc] initWithFrame:CGRectMake(88, 0, WIDTH-88-buyViaShoppingCartButtonWidth-30, bottomHeight)];
+    self.total = [[UILabel alloc] initWithFrame:CGRectMake(88, 0, SHPWIDTH-88-buyViaShoppingCartButtonWidth-30, bottomHeight)];
     self.total.text = [[NSString alloc] initWithFormat:@"合计:(%.2f)",self.totalPrice];
     self.total.textAlignment = NSTextAlignmentRight;
     [self.bottomBar addSubview:self.total];
@@ -314,7 +314,7 @@
     
     //复选框
     cellForMerchant.selectedButton.section = indexPath.section;
-    cellForMerchant.selectedButton.backgroundColor = cellForMerchant.selectedButton.CMBselected ? MYBLUE : [UIColor whiteColor];
+    cellForMerchant.selectedButton.backgroundColor = cellForMerchant.selectedButton.CMBselected ? SHPBLUE : [UIColor whiteColor];
     [cellForMerchant.selectedButton addTarget:self action:@selector(updateBuyButtonAndTotalLabel) forControlEvents:UIControlEventTouchUpInside];
     //更新所在section的全选状态
     [cellForMerchant.selectedButton addTarget:self action:@selector(updateAllSelectedInsection:) forControlEvents:UIControlEventTouchUpInside];
@@ -349,7 +349,7 @@
     headerOfShoppingCartSection *headerOfSection = [[headerOfShoppingCartSection alloc] init];
     headerOfSection.backgroundColor = [UIColor whiteColor];
     
-    UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(44,0,WIDTH-44,44)];
+    UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(44,0,SHPWIDTH-44,44)];
     //在merchant中根据商家ID查询merchantName
     NSString *merchantName = [self findMterchantNameBymerchantID:self.merchantIDArray[section]];
     name.text = [[NSString alloc] initWithFormat:@"%@",merchantName];
@@ -359,7 +359,7 @@
     headerOfSection.checkButton = [[checkButton alloc] initWithFrame:CGRectMake(11, 11, 22, 22)];
     headerOfSection.checkButton.section = section;
     [headerOfSection.checkButton addTarget:self action:@selector(selectSection:) forControlEvents:UIControlEventTouchUpInside];
-    headerOfSection.checkButton.backgroundColor = [self.merchantIDAndSelectedInSection[self.merchantIDArray[section]] boolValue] ? MYBLUE : [UIColor whiteColor];
+    headerOfSection.checkButton.backgroundColor = [self.merchantIDAndSelectedInSection[self.merchantIDArray[section]] boolValue] ? SHPBLUE : [UIColor whiteColor];
     [headerOfSection.checkButton addTarget:self action:@selector(updateAllSelectedForShoppingCart) forControlEvents:UIControlEventTouchUpInside];
     //更新已选择商品
     [headerOfSection.checkButton addTarget:self action:@selector(updateMerchandiseSelected) forControlEvents:UIControlEventTouchUpInside];
@@ -370,7 +370,7 @@
 //选择section
 - (void) selectSection:(checkButton *)button{
     //当前section下是否已经全选
-    button.backgroundColor = MYBLUE;
+    button.backgroundColor = SHPBLUE;
     button.CMBselected =  YES ;
     BOOL allSelected = YES;
     NSArray * cellArray = self.merchandiseInShoppingCart[(self.merchantIDArray[button.section])];
@@ -428,7 +428,7 @@
 //全选动作
 - (void) selectAllMerchandiseInShoppingCart{
     //购物车是否已经全选
-    self.selectAllButton.backgroundColor = MYBLUE;
+    self.selectAllButton.backgroundColor = SHPBLUE;
     self.selectAllButton.CMBselected =  YES ;
     BOOL allSelected = YES;
     NSMutableArray *tmpmerchantIDArray = [[NSMutableArray alloc] init];
@@ -461,7 +461,7 @@
     }
     else{
         self.selectAllButton.CMBselected = YES;
-        self.selectAllButton.backgroundColor = MYBLUE;
+        self.selectAllButton.backgroundColor = SHPBLUE;
     }
     
     [self updateBuyButtonAndTotalLabel];
@@ -501,7 +501,7 @@
     //如果已经全选,则更新UI
     if(allSelected){
         self.selectAllButton.CMBselected = YES;
-        self.selectAllButton.backgroundColor = MYBLUE;
+        self.selectAllButton.backgroundColor = SHPBLUE;
     }
 }
 

@@ -7,9 +7,9 @@
 //
 
 #import "shoppingCartTableViewCell.h"
-#define WIDTH  (([[UIScreen mainScreen] bounds].size.width))
-#define HEIGHT  (([[UIScreen mainScreen] bounds].size.height))
-#define MYBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
+#define SHPWIDTH  (([[UIScreen mainScreen] bounds].size.width))
+#define SHPHEIGHT  (([[UIScreen mainScreen] bounds].size.height))
+#define SHPBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
 @implementation shoppingCartTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -32,49 +32,49 @@
         
         
         //商品名
-        self.merchandiseName = [[UILabel alloc] initWithFrame:CGRectMake(leftWidth, 0, WIDTH-leftWidth,merchandiseNameHeight)];
+        self.merchandiseName = [[UILabel alloc] initWithFrame:CGRectMake(leftWidth, 0, SHPWIDTH-leftWidth,merchandiseNameHeight)];
         [self addSubview:self.merchandiseName];
         self.merchandiseName.textColor= [UIColor blackColor];
         self.merchandiseName.text=@"商品名";
         
         //描述
-        self.merchandiseDescription = [[UITextView alloc] initWithFrame:CGRectMake(leftWidth, merchandiseNameHeight, WIDTH-leftWidth,merchandiseDescriptionHeight)];
+        self.merchandiseDescription = [[UITextView alloc] initWithFrame:CGRectMake(leftWidth, merchandiseNameHeight, SHPWIDTH-leftWidth,merchandiseDescriptionHeight)];
         self.merchandiseDescription.userInteractionEnabled = NO; 
         [self addSubview:self.merchandiseDescription];
         self.merchandiseDescription.textColor= [UIColor blackColor];
         self.merchandiseDescription.text=@"描gerhstttttttttttstr辞色吕布vESIVLUDSv就是大哥vilSEGUVSGDvufsleivgusIVGueLGviugseUFvsegr辞了时述";
         
         //价格
-        self.merchandisePrice = [[UILabel alloc] initWithFrame:CGRectMake(leftWidth, merchandiseNameHeight+merchandiseDescriptionHeight, WIDTH-leftWidth,merchandisePriceHeight)];
+        self.merchandisePrice = [[UILabel alloc] initWithFrame:CGRectMake(leftWidth, merchandiseNameHeight+merchandiseDescriptionHeight, SHPWIDTH-leftWidth,merchandisePriceHeight)];
         [self addSubview:self.merchandisePrice];
         self.merchandisePrice.textColor= [UIColor blackColor]; 
         self.merchandisePrice.text=@"价格";
         
         //减一按钮
-        self.countDec = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH-4*countButtonWidth-25, merchandiseNameHeight+merchandiseDescriptionHeight+merchandisePriceHeight/2-countButtonWidth/2, countButtonWidth, countButtonWidth)];
+        self.countDec = [[UIButton alloc] initWithFrame:CGRectMake(SHPWIDTH-4*countButtonWidth-25, merchandiseNameHeight+merchandiseDescriptionHeight+merchandisePriceHeight/2-countButtonWidth/2, countButtonWidth, countButtonWidth)];
             self.countDec.layer.borderWidth = 1.0;
         self.countDec.layer.cornerRadius = 3.0;
         [self.countDec setTitle:@"-" forState:UIControlStateNormal];
-        [self.countDec setTitleColor:MYBLUE forState:UIControlStateNormal];
+        [self.countDec setTitleColor:SHPBLUE forState:UIControlStateNormal];
 
-        self.countDec.layer.borderColor = [MYBLUE CGColor];//设置边框颜色
+        self.countDec.layer.borderColor = [SHPBLUE CGColor];//设置边框颜色
         [self addSubview:self.countDec];
 
         //加一按钮
-        self.countInc = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH-countButtonWidth-25, merchandiseNameHeight+merchandiseDescriptionHeight+merchandisePriceHeight/2-countButtonWidth/2, countButtonWidth, countButtonWidth)];
+        self.countInc = [[UIButton alloc] initWithFrame:CGRectMake(SHPWIDTH-countButtonWidth-25, merchandiseNameHeight+merchandiseDescriptionHeight+merchandisePriceHeight/2-countButtonWidth/2, countButtonWidth, countButtonWidth)];
         self.countInc.layer.borderWidth = 1.0;
         self.countInc.layer.cornerRadius = 3.0;
                [self.countInc setTitle:@"+" forState:UIControlStateNormal];
-             [self.countInc setTitleColor:MYBLUE forState:UIControlStateNormal];
-        self.countInc.layer.borderColor = [MYBLUE CGColor];//设置边框颜色
+             [self.countInc setTitleColor:SHPBLUE forState:UIControlStateNormal];
+        self.countInc.layer.borderColor = [SHPBLUE CGColor];//设置边框颜色
         [self addSubview:self.countInc];
         
         //显示数量
         self.merchandiseCountBuf = 1;
-        self.merchandiseCount = [[UITextField alloc] initWithFrame:CGRectMake(WIDTH-3*countButtonWidth-25, merchandiseNameHeight+merchandiseDescriptionHeight+merchandisePriceHeight/2-countButtonWidth/2, countButtonWidth*2, countButtonWidth)];
+        self.merchandiseCount = [[UITextField alloc] initWithFrame:CGRectMake(SHPWIDTH-3*countButtonWidth-25, merchandiseNameHeight+merchandiseDescriptionHeight+merchandisePriceHeight/2-countButtonWidth/2, countButtonWidth*2, countButtonWidth)];
 //        self.merchandiseCount.layer.borderWidth = 1.0;
 //        self.merchandiseCount.layer.cornerRadius = 3.0;
-//        self.merchandiseCount.layer.borderColor = [MYBLUE CGColor];//设置边框颜色
+//        self.merchandiseCount.layer.borderColor = [SHPBLUE CGColor];//设置边框颜色
         self.merchandiseCount.text = @"1";
         self.merchandiseCount.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.merchandiseCount];
@@ -91,7 +91,7 @@
         self.selectedButton.CMBselected =  NO ;
     }
     else{
-         self.selectedButton.backgroundColor = MYBLUE;
+         self.selectedButton.backgroundColor = SHPBLUE;
         self.selectedButton.CMBselected =  YES ;
     }
 }

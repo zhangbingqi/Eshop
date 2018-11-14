@@ -10,10 +10,6 @@
 
 #define CELLREUSEIDENTIFIER @"allUser"
 
-#define WIDTH  (([[UIScreen mainScreen] bounds].size.width ))
-#define HEIGHT  (([[UIScreen mainScreen] bounds].size.height))
-#define MYBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
-
 #define orderStateWaitPaiD @"0"
 #define orderStateWaitDelivery @"1"
 #define orderStateShipped @"2"
@@ -47,79 +43,79 @@
     EShopDatabase *db=[EShopDatabase shareInstance];
     self.userArray =  [db selectAllColumnFromTable:@"user" where:nil];
     //添加用户Button
-    UIButton *addUser = [[UIButton alloc] initWithFrame:CGRectMake(0, 64, WIDTH, 44)];
+    UIButton *addUser = [[UIButton alloc] initWithFrame:CGRectMake(0, 64, SHPWIDTH, 44)];
     [addUser setTitle:@"添加用户" forState:UIControlStateNormal];
-    [addUser setTitleColor:MYBLUE forState:UIControlStateNormal];
+    [addUser setTitleColor:SHPBLUE forState:UIControlStateNormal];
     [addUser addTarget:self action:@selector(clickAddUser) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:addUser];
     //添加用户view
-    self.addUserView = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT/4, WIDTH, 44*4)];
+    self.addUserView = [[UIView alloc] initWithFrame:CGRectMake(0, SHPHEIGHT/4, SHPWIDTH, 44*4)];
     self.addUserView.backgroundColor = [UIColor whiteColor];
     //账户名
     UILabel *addNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 77, 44)];
     addNameLabel.text = @"账户名：";
     [self.addUserView addSubview:addNameLabel];
-    self.addNameField = [[UITextField alloc] initWithFrame:CGRectMake(77, 0, WIDTH-10-44-44-10-44-44-77, 44)];
+    self.addNameField = [[UITextField alloc] initWithFrame:CGRectMake(77, 0, SHPWIDTH-10-44-44-10-44-44-77, 44)];
     [self.addUserView addSubview:self.addNameField];
-    UILabel *cutLine1 = [[UILabel alloc] initWithFrame:CGRectMake(77, 40, WIDTH-10-44-44-10-44-44-77, 2)];
+    UILabel *cutLine1 = [[UILabel alloc] initWithFrame:CGRectMake(77, 40, SHPWIDTH-10-44-44-10-44-44-77, 2)];
     cutLine1.backgroundColor = [UIColor blackColor];
     [self.addUserView addSubview:cutLine1];
     self.addNameField.delegate = self;
     //性别
-    UILabel *addSexLabel = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH-10-44-44-10-44-44, 0, 44, 44)];
+    UILabel *addSexLabel = [[UILabel alloc] initWithFrame:CGRectMake(SHPWIDTH-10-44-44-10-44-44, 0, 44, 44)];
     addSexLabel.text = @"性别";
     [self.addUserView addSubview:addSexLabel];
-    self.addSexField = [[UITextField alloc] initWithFrame:CGRectMake(WIDTH-10-44-44-10-44, 0, 44, 44)];
+    self.addSexField = [[UITextField alloc] initWithFrame:CGRectMake(SHPWIDTH-10-44-44-10-44, 0, 44, 44)];
     [self.addUserView addSubview:self.addSexField];
-    UILabel *cutLine2 = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH-10-44-44-10-44, 40, 44, 2)];
+    UILabel *cutLine2 = [[UILabel alloc] initWithFrame:CGRectMake(SHPWIDTH-10-44-44-10-44, 40, 44, 2)];
     cutLine2.backgroundColor = [UIColor blackColor];
     [self.addUserView addSubview:cutLine2];
     [self.addSexField addTarget:self action:@selector(selectSex) forControlEvents:UIControlEventTouchUpInside];
     self.addSexField.delegate = self;
     //年龄
-    UILabel *addAgeLabel = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH-10-44-44, 0, 44, 44)];
+    UILabel *addAgeLabel = [[UILabel alloc] initWithFrame:CGRectMake(SHPWIDTH-10-44-44, 0, 44, 44)];
     addAgeLabel.text = @"年龄";
     [self.addUserView addSubview:addAgeLabel];
-    self.addAgeField = [[UITextField alloc] initWithFrame:CGRectMake(WIDTH-10-44, 0, 44, 44)];
+    self.addAgeField = [[UITextField alloc] initWithFrame:CGRectMake(SHPWIDTH-10-44, 0, 44, 44)];
     [self.addUserView addSubview:self.addAgeField];
-    UILabel *cutLine3 = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH-10-44, 40, 44, 2)];
+    UILabel *cutLine3 = [[UILabel alloc] initWithFrame:CGRectMake(SHPWIDTH-10-44, 40, 44, 2)];
     cutLine3.backgroundColor = [UIColor blackColor];
     [self.addUserView addSubview:cutLine3];
     [self.addAgeField addTarget:self action:@selector(checkAge:) forControlEvents:UIControlEventEditingChanged];
     self.addAgeField.delegate = self;
     
     //viewForPicker 性别选择
-    self.pickerForSex = [[UIPickerView alloc] initWithFrame:CGRectMake(WIDTH-10-44-44-10-44+5,  0, 30, 66)];
+    self.pickerForSex = [[UIPickerView alloc] initWithFrame:CGRectMake(SHPWIDTH-10-44-44-10-44+5,  0, 30, 66)];
     self.pickerForSex.backgroundColor = [UIColor whiteColor];
     self.pickerForSex.delegate = self;
     self.pickerForSex.dataSource = self;
     self.pickerForSex.showsSelectionIndicator = YES;
     
     //取消按钮
-    self.addCancel = [[UIButton alloc] initWithFrame:CGRectMake(10, 44*3, WIDTH/2-10, 44)];
+    self.addCancel = [[UIButton alloc] initWithFrame:CGRectMake(10, 44*3, SHPWIDTH/2-10, 44)];
     [self.addUserView addSubview:self.addCancel];
     [self.addCancel addTarget:self action:@selector(clickAddCancel) forControlEvents:UIControlEventTouchUpInside];
     [self.addCancel setTitle:@"取  消" forState:UIControlStateNormal];
     [self.addCancel setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.addCancel.layer.borderColor = MYBLUE.CGColor;//设置边框颜色
+    self.addCancel.layer.borderColor = SHPBLUE.CGColor;//设置边框颜色
     self.addCancel.layer.borderWidth = 1.0f;//设置边框颜色
     //确认按钮
-    self.addOK = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH/2, 44*3, WIDTH/2-10, 44)];
+    self.addOK = [[UIButton alloc] initWithFrame:CGRectMake(SHPWIDTH/2, 44*3, SHPWIDTH/2-10, 44)];
     [self.addUserView addSubview:self.addOK];
     [self.addOK addTarget:self action:@selector(clickAddOK) forControlEvents:UIControlEventTouchUpInside];
     [self.addOK setTitle:@"确  定" forState:UIControlStateNormal];
     [self.addOK setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.addOK.backgroundColor = MYBLUE;
+    self.addOK.backgroundColor = SHPBLUE;
     //弹出view
-    self.backView = [[UIView alloc] initWithFrame:CGRectMake(0, 64+2, WIDTH, HEIGHT-64-44-2-49+44)];
+    self.backView = [[UIView alloc] initWithFrame:CGRectMake(0, 64+2, SHPWIDTH, SHPHEIGHT-64-44-2-49+44)];
     self.backView.backgroundColor = [UIColor whiteColor];
     [self.backView addSubview:self.addUserView];
     //cutLine
-    UILabel *cutLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 64+44, WIDTH, 2)];
-    cutLine.backgroundColor = MYBLUE;
+    UILabel *cutLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 64+44, SHPWIDTH, 2)];
+    cutLine.backgroundColor = SHPBLUE;
     [self.view addSubview:cutLine];
     //tableView
-    self.userTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64+44+2, WIDTH, HEIGHT-64-44-2-49) style:UITableViewStyleGrouped];
+    self.userTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64+44+2, SHPWIDTH, SHPHEIGHT-64-44-2-49) style:UITableViewStyleGrouped];
     self.userTableView.delegate = self;
     self.userTableView.dataSource = self;
     [self.userTableView registerClass:[userTableViewCell class] forCellReuseIdentifier:CELLREUSEIDENTIFIER];

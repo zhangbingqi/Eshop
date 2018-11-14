@@ -8,10 +8,6 @@
 
 #import "logoutMerchantViewController.h"
 
-#define WIDTH  (([[UIScreen mainScreen] bounds].size.width ))
-#define HEIGHT  (([[UIScreen mainScreen] bounds].size.height))
-#define MYBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
-
 @interface logoutMerchantViewController ()
 
 @end
@@ -24,10 +20,10 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     //注销按钮
-    UIButton *logoutButton = [[UIButton alloc] initWithFrame:CGRectMake(15, HEIGHT/2-60, WIDTH-30, 44)];
+    UIButton *logoutButton = [[UIButton alloc] initWithFrame:CGRectMake(15, SHPHEIGHT/2-60, SHPWIDTH-30, 44)];
     [logoutButton setTitle:@"注销" forState:UIControlStateNormal];
     [logoutButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    logoutButton.backgroundColor = MYBLUE;
+    logoutButton.backgroundColor = SHPBLUE;
     [self.view addSubview:logoutButton];
     logoutButton.layer.cornerRadius = 20.0;
     [logoutButton addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];

@@ -10,7 +10,6 @@
 #import "mainViewController.h"
 #import "homePageViewController.h"
 #import "EShopDatabase.h"
-#import "screenSize.h"
 #import "administratorHomeTabBarController.h"
 #import "merchantHomeViewController.h"
 @interface EShopLoginViewController : UIViewController

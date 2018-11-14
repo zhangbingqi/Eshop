@@ -9,9 +9,6 @@
 #import "merchantManagerViewController.h"
 
 #define CELLREUSEIDENTIFIER @"allMerchandise"
-#define WIDTH  (([[UIScreen mainScreen] bounds].size.width ))
-#define HEIGHT  (([[UIScreen mainScreen] bounds].size.height))
-#define MYBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
 
 #define orderStateWaitPaiD @"0"
 #define orderStateWaitDelivery @"1"
@@ -44,60 +41,60 @@
     EShopDatabase *db=[EShopDatabase shareInstance];
     self.merchantArray =  [db selectAllColumnFromTable:@"merchant" where:nil];
     //添加商家Button
-    UIButton *addMerchant = [[UIButton alloc] initWithFrame:CGRectMake(0, 64, WIDTH, 44)];
+    UIButton *addMerchant = [[UIButton alloc] initWithFrame:CGRectMake(0, 64, SHPWIDTH, 44)];
     [addMerchant setTitle:@"添加商家" forState:UIControlStateNormal];
-    [addMerchant setTitleColor:MYBLUE forState:UIControlStateNormal];
+    [addMerchant setTitleColor:SHPBLUE forState:UIControlStateNormal];
     [addMerchant addTarget:self action:@selector(clickAddMerchant) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:addMerchant];
     //添加商家view
-    self.addMerchantView = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT/4, WIDTH, 44*4)];
+    self.addMerchantView = [[UIView alloc] initWithFrame:CGRectMake(0, SHPHEIGHT/4, SHPWIDTH, 44*4)];
     self.addMerchantView.backgroundColor = [UIColor whiteColor];
     //账户名
     UILabel *addAccountNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 77, 44)];
     addAccountNameLabel.text = @"账户名：";
     [self.addMerchantView addSubview:addAccountNameLabel];
-    self.addAccountNameField = [[UITextField alloc] initWithFrame:CGRectMake(77, 0, WIDTH-77-10, 44)];
+    self.addAccountNameField = [[UITextField alloc] initWithFrame:CGRectMake(77, 0, SHPWIDTH-77-10, 44)];
     [self.addMerchantView addSubview:self.addAccountNameField];
-    UILabel *cutLine1 = [[UILabel alloc] initWithFrame:CGRectMake(77, 40, WIDTH-77-10, 2)];
-    cutLine1.backgroundColor = MYBLUE;
+    UILabel *cutLine1 = [[UILabel alloc] initWithFrame:CGRectMake(77, 40, SHPWIDTH-77-10, 2)];
+    cutLine1.backgroundColor = SHPBLUE;
     [self.addMerchantView addSubview:cutLine1];
     self.addAccountNameField.delegate = self;
     //店铺名
     UILabel *addShopNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 66, 77, 44)];
     addShopNameLabel.text = @"店铺名";
     [self.addMerchantView addSubview:addShopNameLabel];
-    self.addShopNameField = [[UITextField alloc] initWithFrame:CGRectMake(77, 66, WIDTH-77, 44)];
+    self.addShopNameField = [[UITextField alloc] initWithFrame:CGRectMake(77, 66, SHPWIDTH-77, 44)];
     [self.addMerchantView addSubview:self.addShopNameField];
-    UILabel *cutLine2 = [[UILabel alloc] initWithFrame:CGRectMake(77, 66+40, WIDTH-77-10, 2)];
-    cutLine2.backgroundColor = MYBLUE;
+    UILabel *cutLine2 = [[UILabel alloc] initWithFrame:CGRectMake(77, 66+40, SHPWIDTH-77-10, 2)];
+    cutLine2.backgroundColor = SHPBLUE;
     [self.addMerchantView addSubview:cutLine2];
     self.addShopNameField.delegate = self;
    
     //取消按钮
-    self.addCancel = [[UIButton alloc] initWithFrame:CGRectMake(10, 44*3, WIDTH/2-10, 44)];
+    self.addCancel = [[UIButton alloc] initWithFrame:CGRectMake(10, 44*3, SHPWIDTH/2-10, 44)];
     [self.addMerchantView addSubview:self.addCancel];
     [self.addCancel addTarget:self action:@selector(clickAddCancel) forControlEvents:UIControlEventTouchUpInside];
     [self.addCancel setTitle:@"取  消" forState:UIControlStateNormal];
     [self.addCancel setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.addCancel.layer.borderColor = MYBLUE.CGColor;//设置边框颜色
+    self.addCancel.layer.borderColor = SHPBLUE.CGColor;//设置边框颜色
     self.addCancel.layer.borderWidth = 1.0f;//设置边框颜色
     //确认按钮
-    self.addOK = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH/2, 44*3, WIDTH/2-10, 44)];
+    self.addOK = [[UIButton alloc] initWithFrame:CGRectMake(SHPWIDTH/2, 44*3, SHPWIDTH/2-10, 44)];
     [self.addMerchantView addSubview:self.addOK];
     [self.addOK addTarget:self action:@selector(clickAddOK) forControlEvents:UIControlEventTouchUpInside];
     [self.addOK setTitle:@"确  定" forState:UIControlStateNormal];
     [self.addOK setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.addOK.backgroundColor = MYBLUE;
+    self.addOK.backgroundColor = SHPBLUE;
     //弹出view
-    self.addBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 64+2, WIDTH, HEIGHT-64-44-2-49+44)];
+    self.addBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 64+2, SHPWIDTH, SHPHEIGHT-64-44-2-49+44)];
     self.addBackView.backgroundColor = [UIColor whiteColor];
     [self.addBackView addSubview:self.addMerchantView];
     //cutLine
-    UILabel *cutLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 64+44, WIDTH, 2)];
-    cutLine.backgroundColor = MYBLUE;
+    UILabel *cutLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 64+44, SHPWIDTH, 2)];
+    cutLine.backgroundColor = SHPBLUE;
     [self.view addSubview:cutLine];
     //tableView
-    self.merchantTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64+44+2, WIDTH, HEIGHT-64-44-2-49) style:UITableViewStyleGrouped];
+    self.merchantTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64+44+2, SHPWIDTH, SHPHEIGHT-64-44-2-49) style:UITableViewStyleGrouped];
     self.merchantTableView.delegate = self;
     self.merchantTableView.dataSource = self;
     [self.merchantTableView registerClass:[merchantTableViewCell class] forCellReuseIdentifier:CELLREUSEIDENTIFIER];

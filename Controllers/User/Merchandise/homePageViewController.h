@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "screenSize.h"
 #import "showMerchandiseTableView.h"
 #import "merchandiseTableViewCell.h"
 #import "secondLevelDirectoryViewController.h"

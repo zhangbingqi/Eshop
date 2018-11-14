@@ -11,10 +11,6 @@
 
 #define CELLREUSEIDENTIFIER @"allMerchandise"
 
-#define WIDTH  (([[UIScreen mainScreen] bounds].size.width ))
-#define HEIGHT  (([[UIScreen mainScreen] bounds].size.height))
-#define MYBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
-
 @interface merchandiseManagerViewController () <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
 @property NSArray *merchandiseArray;
@@ -49,17 +45,17 @@
 - (void)viewWillAppear:(BOOL)animated{
     
     //点击新增收货地址后弹出的view
-    self.addMerchandiseView = [[UIView alloc] initWithFrame:CGRectMake(0, 69, WIDTH, 44*7)];
+    self.addMerchandiseView = [[UIView alloc] initWithFrame:CGRectMake(0, 69, SHPWIDTH, 44*7)];
     self.addMerchandiseView.backgroundColor = [UIColor whiteColor];
     
     //商品名
     UILabel *addMerchandiseNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 88, 44)];
     addMerchandiseNameLabel.text = @"商品名:";
     [self.addMerchandiseView addSubview:addMerchandiseNameLabel];
-    self.addMerchandiseNameFeild = [[UITextField alloc] initWithFrame:CGRectMake(88, 0, WIDTH-88-10, 44)];
+    self.addMerchandiseNameFeild = [[UITextField alloc] initWithFrame:CGRectMake(88, 0, SHPWIDTH-88-10, 44)];
     [self.addMerchandiseView addSubview:self.addMerchandiseNameFeild];
-    UILabel *cutLine1 = [[UILabel alloc] initWithFrame:CGRectMake(88, 40, WIDTH-88-10, 2)];
-    cutLine1.backgroundColor = MYBLUE;
+    UILabel *cutLine1 = [[UILabel alloc] initWithFrame:CGRectMake(88, 40, SHPWIDTH-88-10, 2)];
+    cutLine1.backgroundColor = SHPBLUE;
     [self.addMerchandiseView addSubview:cutLine1];
     self.addMerchandiseNameFeild.delegate = self;
     
@@ -67,10 +63,10 @@
     UILabel *addMerchandisePriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 44, 88, 44)];
     addMerchandisePriceLabel.text = @"商品价格:";
     [self.addMerchandiseView addSubview:addMerchandisePriceLabel];
-    self.addMerchandisePriceField = [[UITextField alloc] initWithFrame:CGRectMake(88, 44, WIDTH-88, 44)];
+    self.addMerchandisePriceField = [[UITextField alloc] initWithFrame:CGRectMake(88, 44, SHPWIDTH-88, 44)];
     [self.addMerchandiseView addSubview:self.addMerchandisePriceField];
-    UILabel *cutLine2 = [[UILabel alloc] initWithFrame:CGRectMake(88, 44+40, WIDTH-88-10, 2)];
-    cutLine2.backgroundColor = MYBLUE;
+    UILabel *cutLine2 = [[UILabel alloc] initWithFrame:CGRectMake(88, 44+40, SHPWIDTH-88-10, 2)];
+    cutLine2.backgroundColor = SHPBLUE;
     [self.addMerchandiseView addSubview:cutLine2];
     self.addMerchandisePriceField.delegate = self;
     
@@ -78,10 +74,10 @@
     UILabel *addMerchandiseDescriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 88, 88, 44)];
     addMerchandiseDescriptionLabel.text = @"商品描述:";
     [self.addMerchandiseView addSubview:addMerchandiseDescriptionLabel];
-    self.addMerchandiseDescriptionField = [[UITextField alloc] initWithFrame:CGRectMake(88, 88, WIDTH-88, 44)];
+    self.addMerchandiseDescriptionField = [[UITextField alloc] initWithFrame:CGRectMake(88, 88, SHPWIDTH-88, 44)];
     [self.addMerchandiseView addSubview:self.addMerchandiseDescriptionField];
-    UILabel *cutLine3 = [[UILabel alloc] initWithFrame:CGRectMake(88, 88+40, WIDTH-88-10, 2)];
-    cutLine3.backgroundColor = MYBLUE;
+    UILabel *cutLine3 = [[UILabel alloc] initWithFrame:CGRectMake(88, 88+40, SHPWIDTH-88-10, 2)];
+    cutLine3.backgroundColor = SHPBLUE;
     [self.addMerchandiseView addSubview:cutLine3];
     self.addMerchandiseDescriptionField.delegate = self;
     
@@ -90,10 +86,10 @@
     UILabel *addMenusNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 44*3, 88, 44)];
     addMenusNameLabel.text = @"一级分类:";
     [self.addMerchandiseView addSubview:addMenusNameLabel];
-    self.addMenusNameField = [[UITextField alloc] initWithFrame:CGRectMake(88, 44*3, WIDTH-88, 44)];
+    self.addMenusNameField = [[UITextField alloc] initWithFrame:CGRectMake(88, 44*3, SHPWIDTH-88, 44)];
     [self.addMerchandiseView addSubview:self.addMenusNameField];
-    UILabel *cutLine4 = [[UILabel alloc] initWithFrame:CGRectMake(88, 44*3+40, WIDTH-88-10, 2)];
-    cutLine4.backgroundColor = MYBLUE;
+    UILabel *cutLine4 = [[UILabel alloc] initWithFrame:CGRectMake(88, 44*3+40, SHPWIDTH-88-10, 2)];
+    cutLine4.backgroundColor = SHPBLUE;
     [self.addMerchandiseView addSubview:cutLine4];
     self.addMenusNameField.delegate = self;
     
@@ -101,10 +97,10 @@
     UILabel *addSortNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 44*4, 88, 44)];
     addSortNameLabel.text = @"二级分类:";
     [self.addMerchandiseView addSubview:addSortNameLabel];
-    self.addSortNameField = [[UITextField alloc] initWithFrame:CGRectMake(88, 44*4, WIDTH-88, 44)];
+    self.addSortNameField = [[UITextField alloc] initWithFrame:CGRectMake(88, 44*4, SHPWIDTH-88, 44)];
     [self.addMerchandiseView addSubview:self.addSortNameField];
-    UILabel *cutLine5 = [[UILabel alloc] initWithFrame:CGRectMake(88, 44*4+40, WIDTH-88-10, 2)];
-    cutLine5.backgroundColor = MYBLUE;
+    UILabel *cutLine5 = [[UILabel alloc] initWithFrame:CGRectMake(88, 44*4+40, SHPWIDTH-88-10, 2)];
+    cutLine5.backgroundColor = SHPBLUE;
     [self.addMerchandiseView addSubview:cutLine5];
     self.addSortNameField.delegate = self;
     
@@ -112,38 +108,38 @@
     UILabel *addQuantityLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 44*5, 88, 44)];
     addQuantityLabel.text = @"库存数量:";
     [self.addMerchandiseView addSubview:addQuantityLabel];
-    self.addQuantityField = [[UITextField alloc] initWithFrame:CGRectMake(88, 44*5, WIDTH-88, 44)];
+    self.addQuantityField = [[UITextField alloc] initWithFrame:CGRectMake(88, 44*5, SHPWIDTH-88, 44)];
     [self.addMerchandiseView addSubview:self.addQuantityField];
-    UILabel *cutLine6 = [[UILabel alloc] initWithFrame:CGRectMake(88, 44*5+40, WIDTH-88-10, 2)];
-    cutLine6.backgroundColor = MYBLUE;
+    UILabel *cutLine6 = [[UILabel alloc] initWithFrame:CGRectMake(88, 44*5+40, SHPWIDTH-88-10, 2)];
+    cutLine6.backgroundColor = SHPBLUE;
     [self.addMerchandiseView addSubview:cutLine6];
     self.addQuantityField.delegate = self;
     
     //取消按钮
-    self.addCancel = [[UIButton alloc] initWithFrame:CGRectMake(10, 44*6, WIDTH/2-10, 44)];
+    self.addCancel = [[UIButton alloc] initWithFrame:CGRectMake(10, 44*6, SHPWIDTH/2-10, 44)];
     [self.addMerchandiseView addSubview:self.addCancel];
     [self.addCancel addTarget:self action:@selector(clickAddCancel) forControlEvents:UIControlEventTouchUpInside];
     [self.addCancel setTitle:@"取  消" forState:UIControlStateNormal];
     [self.addCancel setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.addCancel.layer.borderColor = MYBLUE.CGColor;//设置边框颜色
+    self.addCancel.layer.borderColor = SHPBLUE.CGColor;//设置边框颜色
     self.addCancel.layer.borderWidth = 1.0f;//设置边框颜色
     
     //确认按钮
-    self.addOK = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH/2, 44*6, WIDTH/2-10, 44)];
+    self.addOK = [[UIButton alloc] initWithFrame:CGRectMake(SHPWIDTH/2, 44*6, SHPWIDTH/2-10, 44)];
     [self.addMerchandiseView addSubview:self.addOK];
     [self.addOK addTarget:self action:@selector(clickAddOK) forControlEvents:UIControlEventTouchUpInside];
     [self.addOK setTitle:@"确  定" forState:UIControlStateNormal];
     [self.addOK setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.addOK.backgroundColor = MYBLUE;
+    self.addOK.backgroundColor = SHPBLUE;
     
     //弹出view
-    self.addBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 64+2, WIDTH, HEIGHT-64-2-49)];
+    self.addBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 64+2, SHPWIDTH, SHPHEIGHT-64-2-49)];
     self.addBackView.backgroundColor = [UIColor whiteColor];
     [self.addBackView addSubview:self.addMerchandiseView];
     
     //cutLine
-    UILabel *cutLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 64+44, WIDTH, 2)];
-    cutLine.backgroundColor = MYBLUE;
+    UILabel *cutLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 64+44, SHPWIDTH, 2)];
+    cutLine.backgroundColor = SHPBLUE;
     [self.view addSubview:cutLine];
     
     //从merchandise中根据merchandiseID查询商品
@@ -197,16 +193,16 @@
     
     
     //新品上架Button
-    UIButton *addMerchantButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 64, WIDTH, 44)];
+    UIButton *addMerchantButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 64, SHPWIDTH, 44)];
     [addMerchantButton setTitle:@"新品上架" forState:UIControlStateNormal];
-    [addMerchantButton setTitleColor:MYBLUE forState:UIControlStateNormal];
+    [addMerchantButton setTitleColor:SHPBLUE forState:UIControlStateNormal];
       [addMerchantButton addTarget:self action:@selector(clickAddMerchandiseButton) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:addMerchantButton];
     
   
     
     //tableView //名字取错了，应该是merchandiseTableView
-    self.merchantTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64+44+2, WIDTH, HEIGHT-64-44-2-49) style:UITableViewStyleGrouped];
+    self.merchantTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64+44+2, SHPWIDTH, SHPHEIGHT-64-44-2-49) style:UITableViewStyleGrouped];
     self.merchantTableView.delegate = self;
     self.merchantTableView.dataSource = self;
     [self.merchantTableView registerClass:[merchantTableViewCell class] forCellReuseIdentifier:CELLREUSEIDENTIFIER];
@@ -246,11 +242,11 @@
 //headerView
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UITableViewHeaderFooterView *headerView = [[UITableViewHeaderFooterView alloc] init];
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 44)];
-    backView.backgroundColor = MYBLUE;
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH, 44)];
+    backView.backgroundColor = SHPBLUE;
     [headerView addSubview:backView];
      NSString *menusName = self.merchandiseMenusNameArray[section];
-     UILabel * merchantMenusNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, WIDTH-30,44)];
+     UILabel * merchantMenusNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, SHPWIDTH-30,44)];
     merchantMenusNameLabel.textColor = [UIColor whiteColor];
     merchantMenusNameLabel.text = [[NSString alloc] initWithFormat:@"%@",menusName];
     [backView addSubview:merchantMenusNameLabel];

@@ -10,9 +10,6 @@
 #import "shippingAddressViewController.h"
 
 #define CELLREUSEIDENTIFIER @"allShippingAddress"
-#define WIDTH  (([[UIScreen mainScreen] bounds].size.width ))
-#define HEIGHT  (([[UIScreen mainScreen] bounds].size.height))
-#define MYBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
 
 @interface shippingAddressViewController () <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 @property NSArray *shippingAddressArray;
@@ -46,24 +43,24 @@
     self.shippingAddressArray =  [db selectAllColumnFromTable:@"shippingAddress" where:columnAndValuesForShippingAddress];
     
     //新增收货地址Button
-    UIButton *addShippingAddressButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 64, WIDTH, 44)];
+    UIButton *addShippingAddressButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 64, SHPWIDTH, 44)];
     [addShippingAddressButton setTitle:@"新增收货地址" forState:UIControlStateNormal];
-    [addShippingAddressButton setTitleColor:MYBLUE forState:UIControlStateNormal];
+    [addShippingAddressButton setTitleColor:SHPBLUE forState:UIControlStateNormal];
     [addShippingAddressButton addTarget:self action:@selector(clickAddShippingAddressButton) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:addShippingAddressButton];
     
     //点击新增收货地址后弹出的view
-    self.addShippingAddressView = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT/5-44, WIDTH, 44*5)];
+    self.addShippingAddressView = [[UIView alloc] initWithFrame:CGRectMake(0, SHPHEIGHT/5-44, SHPWIDTH, 44*5)];
     self.addShippingAddressView.backgroundColor = [UIColor whiteColor];
     
     //收货人
     UILabel *addConsigneeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 88, 44)];
     addConsigneeLabel.text = @"收货人:";
     [self.addShippingAddressView addSubview:addConsigneeLabel];
-    self.addConsigneeField = [[UITextField alloc] initWithFrame:CGRectMake(88, 0, WIDTH-88-10, 44)];
+    self.addConsigneeField = [[UITextField alloc] initWithFrame:CGRectMake(88, 0, SHPWIDTH-88-10, 44)];
     [self.addShippingAddressView addSubview:self.addConsigneeField];
-    UILabel *cutLine1 = [[UILabel alloc] initWithFrame:CGRectMake(88, 40, WIDTH-88-10, 2)];
-    cutLine1.backgroundColor = MYBLUE;
+    UILabel *cutLine1 = [[UILabel alloc] initWithFrame:CGRectMake(88, 40, SHPWIDTH-88-10, 2)];
+    cutLine1.backgroundColor = SHPBLUE;
     [self.addShippingAddressView addSubview:cutLine1];
     self.addConsigneeField.delegate = self;
     
@@ -71,10 +68,10 @@
     UILabel *addPhoneNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 44, 88, 44)];
     addPhoneNumberLabel.text = @"电话号:";
     [self.addShippingAddressView addSubview:addPhoneNumberLabel];
-    self.addPhoneNumberField = [[UITextField alloc] initWithFrame:CGRectMake(88, 44, WIDTH-88, 44)];
+    self.addPhoneNumberField = [[UITextField alloc] initWithFrame:CGRectMake(88, 44, SHPWIDTH-88, 44)];
     [self.addShippingAddressView addSubview:self.addPhoneNumberField];
-    UILabel *cutLine2 = [[UILabel alloc] initWithFrame:CGRectMake(88, 44+40, WIDTH-88-10, 2)];
-    cutLine2.backgroundColor = MYBLUE;
+    UILabel *cutLine2 = [[UILabel alloc] initWithFrame:CGRectMake(88, 44+40, SHPWIDTH-88-10, 2)];
+    cutLine2.backgroundColor = SHPBLUE;
     [self.addShippingAddressView addSubview:cutLine2];
     self.addPhoneNumberField.delegate = self;
     
@@ -82,58 +79,58 @@
     UILabel *addShippingAddressLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 88, 88, 44)];
     addShippingAddressLabel.text = @"详细地址:";
     [self.addShippingAddressView addSubview:addShippingAddressLabel];
-    self.addShippingAddressField = [[UITextField alloc] initWithFrame:CGRectMake(88, 88, WIDTH-88, 44)];
+    self.addShippingAddressField = [[UITextField alloc] initWithFrame:CGRectMake(88, 88, SHPWIDTH-88, 44)];
     [self.addShippingAddressView addSubview:self.addShippingAddressField];
-    UILabel *cutLine3 = [[UILabel alloc] initWithFrame:CGRectMake(88, 88+40, WIDTH-88-10, 2)];
-    cutLine3.backgroundColor = MYBLUE;
+    UILabel *cutLine3 = [[UILabel alloc] initWithFrame:CGRectMake(88, 88+40, SHPWIDTH-88-10, 2)];
+    cutLine3.backgroundColor = SHPBLUE;
     [self.addShippingAddressView addSubview:cutLine3];
     self.addShippingAddressField.delegate = self;
     
     //设为默认地址button
     self.isDefaultOrNotButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 44*3+11, 22, 22)];
-    self.isDefaultOrNotButton.layer.borderColor = [MYBLUE CGColor];
+    self.isDefaultOrNotButton.layer.borderColor = [SHPBLUE CGColor];
     self.isDefaultOrNotButton.layer.borderWidth = 2;
     [self.isDefaultOrNotButton addTarget:self action:@selector(clickIsDefaultOrNot) forControlEvents:UIControlEventTouchUpInside];
     [self.addShippingAddressView addSubview:self.isDefaultOrNotButton];
     
     //设为默认地址label
-    UILabel *isDefaultOrNotLabel = [[UILabel alloc] initWithFrame:CGRectMake(88, 44*3, WIDTH-88, 44)];
+    UILabel *isDefaultOrNotLabel = [[UILabel alloc] initWithFrame:CGRectMake(88, 44*3, SHPWIDTH-88, 44)];
     isDefaultOrNotLabel.text = @"保存为默认收货地址";
-    isDefaultOrNotLabel.textColor = MYBLUE;
+    isDefaultOrNotLabel.textColor = SHPBLUE;
     [self.addShippingAddressView addSubview:isDefaultOrNotLabel];
     
     //设为默认地址标志
     self.isDefaultOrNot = 0;
     
     //取消按钮
-    self.addCancel = [[UIButton alloc] initWithFrame:CGRectMake(10, 44*4, WIDTH/2-10, 44)];
+    self.addCancel = [[UIButton alloc] initWithFrame:CGRectMake(10, 44*4, SHPWIDTH/2-10, 44)];
     [self.addShippingAddressView addSubview:self.addCancel];
     [self.addCancel addTarget:self action:@selector(clickAddCancel) forControlEvents:UIControlEventTouchUpInside];
     [self.addCancel setTitle:@"取  消" forState:UIControlStateNormal];
     [self.addCancel setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.addCancel.layer.borderColor = MYBLUE.CGColor;//设置边框颜色
+    self.addCancel.layer.borderColor = SHPBLUE.CGColor;//设置边框颜色
     self.addCancel.layer.borderWidth = 1.0f;//设置边框颜色
     
     //确认按钮
-    self.addOK = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH/2, 44*4, WIDTH/2-10, 44)];
+    self.addOK = [[UIButton alloc] initWithFrame:CGRectMake(SHPWIDTH/2, 44*4, SHPWIDTH/2-10, 44)];
     [self.addShippingAddressView addSubview:self.addOK];
     [self.addOK addTarget:self action:@selector(clickAddOK) forControlEvents:UIControlEventTouchUpInside];
     [self.addOK setTitle:@"确  定" forState:UIControlStateNormal];
     [self.addOK setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.addOK.backgroundColor = MYBLUE;
+    self.addOK.backgroundColor = SHPBLUE;
     
     //弹出view
-    self.addBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 64+2, WIDTH, HEIGHT-64-2-49)];
+    self.addBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 64+2, SHPWIDTH, SHPHEIGHT-64-2-49)];
     self.addBackView.backgroundColor = [UIColor whiteColor];
     [self.addBackView addSubview:self.addShippingAddressView];
     
     //cutLine
-    UILabel *cutLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 64+44, WIDTH, 2)];
-    cutLine.backgroundColor = MYBLUE;
+    UILabel *cutLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 64+44, SHPWIDTH, 2)];
+    cutLine.backgroundColor = SHPBLUE;
     [self.view addSubview:cutLine];
     
     //tableView
-    self.shippingAddressTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64+44+2, WIDTH, HEIGHT-64-44-2-49) style:UITableViewStyleGrouped];
+    self.shippingAddressTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64+44+2, SHPWIDTH, SHPHEIGHT-64-44-2-49) style:UITableViewStyleGrouped];
     self.shippingAddressTableView.delegate = self;
     self.shippingAddressTableView.dataSource = self;
     [self.shippingAddressTableView registerClass:[shippingAddressTableViewCell class] forCellReuseIdentifier:CELLREUSEIDENTIFIER];
@@ -188,12 +185,12 @@
             return cell;
         }
         else{
-            UITableViewCell *cellSelected = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 88)];
-            UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 88)];
+            UITableViewCell *cellSelected = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH, 88)];
+            UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH, 88)];
             [cellSelected addSubview:backgroundView];
-            UILabel *displayReminder = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 88)];
+            UILabel *displayReminder = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH, 88)];
             displayReminder.text = @"没有默认收货地址";
-            displayReminder.textColor = MYBLUE;
+            displayReminder.textColor = SHPBLUE;
             displayReminder.textAlignment = NSTextAlignmentCenter;
             [backgroundView addSubview:displayReminder];
             [cellSelected setUserInteractionEnabled:NO];
@@ -215,13 +212,13 @@
     if(section){
         return nil;
     }
-    UITableViewHeaderFooterView *headerView = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 44)];
-    UITextField *headerTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 44)];
-    headerTextField.backgroundColor = MYBLUE;
+    UITableViewHeaderFooterView *headerView = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH, 44)];
+    UITextField *headerTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SHPWIDTH, 44)];
+    headerTextField.backgroundColor = SHPBLUE;
     [headerTextField setText:@"默认收货地址:"];
     [headerTextField setTextColor: [UIColor whiteColor]];
     headerTextField.enabled = NO;
-    headerView.backgroundColor = MYBLUE;//headerView设置背景颜色是无效的
+    headerView.backgroundColor = SHPBLUE;//headerView设置背景颜色是无效的
     [headerView addSubview:headerTextField];
     return  headerView;
 }
@@ -396,7 +393,7 @@
         self.isDefaultOrNotButton.backgroundColor = [UIColor whiteColor];
     }
     else{
-        self.isDefaultOrNotButton.backgroundColor =MYBLUE;
+        self.isDefaultOrNotButton.backgroundColor =SHPBLUE;
     }
     self.isDefaultOrNot = 1 - self.isDefaultOrNot;
 }

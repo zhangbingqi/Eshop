@@ -8,21 +8,17 @@
 
 #import "userTableViewCell.h"
 
-#define WIDTH  (([[UIScreen mainScreen] bounds].size.width ))
-#define HEIGHT  (([[UIScreen mainScreen] bounds].size.height))
-#define MYBLUE (( [UIColor colorWithRed:63.0/256 green:226.0/256 blue:231.0/256 alpha:1.0] ))
-
 @implementation userTableViewCell
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]){
-        self.userIDLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, WIDTH-0,39)];
+        self.userIDLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, SHPWIDTH-0,39)];
         self.userIDLabel.textColor = [UIColor whiteColor];
-        self.userIDLabel.backgroundColor = MYBLUE;
-        self.userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 44, WIDTH-200, 44)];
-        self.userSex = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH-200, 44, 100, 44)];
-        self.userAge = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH-100, 44, 100, 44)];
+        self.userIDLabel.backgroundColor = SHPBLUE;
+        self.userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 44, SHPWIDTH-200, 44)];
+        self.userSex = [[UILabel alloc] initWithFrame:CGRectMake(SHPWIDTH-200, 44, 100, 44)];
+        self.userAge = [[UILabel alloc] initWithFrame:CGRectMake(SHPWIDTH-100, 44, 100, 44)];
         [self addSubview:self.userIDLabel];
         [self addSubview:self.userNameLabel];
         [self addSubview:self.userSex];

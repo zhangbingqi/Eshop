@@ -9,8 +9,8 @@
 #import "secondLevelDirectoryViewController.h"
 
 
-#define WIDTH  (([[UIScreen mainScreen] bounds].size.width))
-#define HEIGHT  (([[UIScreen mainScreen] bounds].size.height))
+#define SHPWIDTH  (([[UIScreen mainScreen] bounds].size.width))
+#define SHPHEIGHT  (([[UIScreen mainScreen] bounds].size.height))
 
 @interface secondLevelDirectoryViewController () <UITableViewDataSource,UITableViewDelegate>
 
@@ -41,7 +41,7 @@
     }
     self.sortList = [sortSet allObjects];
     
-    CGRect rect = CGRectMake(0,20, WIDTH, HEIGHT);
+    CGRect rect = CGRectMake(0,20, SHPWIDTH, SHPHEIGHT);
     showMerchandiseTableView *merchandiseTable = [[showMerchandiseTableView alloc] initWithFrame:rect style:UITableViewStylePlain];
     merchandiseTable.delegate = self;
     merchandiseTable.dataSource = self;
@@ -78,7 +78,7 @@
 
 // 返回每个 Cell 的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return (HEIGHT - 66) / 9;
+    return (SHPHEIGHT - 66) / 9;
 };
 
 //点击选择事件
